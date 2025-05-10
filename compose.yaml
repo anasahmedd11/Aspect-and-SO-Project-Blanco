@@ -1,0 +1,17 @@
+services:
+  Blanco-mysql:
+    image: mysql:latest
+    container_name: Blanco-user-mysql
+    environment:
+      MYSQL_DATABASE: Blanco_DB
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_USER: Blanco_DB_user
+      MYSQL_PASSWORD: Blanco_DB_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - Blanco_DB_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  Blanco_DB_data:
