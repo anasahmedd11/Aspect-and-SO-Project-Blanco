@@ -23,16 +23,16 @@ public class Notifications{
     private String msg;
     private String type;
     private String Status;
-    private Date sent_at;
+    private Date sent_At;
 
     public Notifications() {
     }
-    public Notifications(long user_id, String msg, String type, String Status, Date sent_at) {
+    public Notifications(long user_id, String msg, String type, String Status, Date sent_At) {
         this.user_id = user_id;
         this.msg = msg;
         this.type = type;
         this.Status = Status;
-        this.sent_at = sent_at;
+        this.sent_At = sent_At;
     }
 
 }
