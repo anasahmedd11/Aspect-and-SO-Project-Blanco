@@ -19,7 +19,7 @@ public class NotificationsController {
     }
 
     @GetMapping("get-notifications/{id}")
-    public NotificationsDTO getNotifications(@PathVariable int id){
+    public NotificationsDTO getNotifications(@PathVariable long id){
         return notificationsRepository.findById(id).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class NotificationsController {
     }
 
     @PutMapping("update-notifications/{id}")
-    public NotificationsDTO updateNotifications(@PathVariable int id, @RequestBody NotificationsDTO notifications){
+    public NotificationsDTO updateNotifications(@PathVariable long id, @RequestBody NotificationsDTO notifications){
 
         NotificationsDTO updateNotifications = notificationsRepository.findById(id).orElse(null);
         if(updateNotifications != null){
@@ -45,7 +45,7 @@ public class NotificationsController {
     }
 
     @DeleteMapping("delete-notification/{id}")
-    public boolean deleteNotification(@PathVariable int id, @RequestBody NotificationsDTO notifications){
+    public boolean deleteNotification(@PathVariable long id, @RequestBody NotificationsDTO notifications){
         if(notificationsRepository.findById(id).isPresent()){
             notificationsRepository.delete(notifications);
             return true;

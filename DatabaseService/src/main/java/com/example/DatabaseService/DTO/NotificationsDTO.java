@@ -34,6 +34,6 @@ public class NotificationsDTO {
         this.msg = msg;
         this.type = type;
         this.status = status;
-        this.sentAt = sentAt;
+        this.sent_At = sentAt;
     }
 }
