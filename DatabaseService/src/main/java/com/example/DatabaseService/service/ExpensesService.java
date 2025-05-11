@@ -18,6 +18,7 @@ import java.util.List;
 import static com.example.DatabaseService.service.NullPropertyNameHelper.getNullPropertyNames;
 
 @Service
+@Transactional
 public class ExpensesService {
 
     private final ExpensesRepository expensesRepository;
@@ -39,7 +40,7 @@ public class ExpensesService {
         return expensesRepository.findById(id).orElse(null);
     }
 
-    @Transactional
+
     public Expenses createExpense(CreateExpenseDTO createExpenseDTO) {
         Long userId = createExpenseDTO.getUserId();
         Users existingUser = usersRepository.findById(userId)
@@ -57,7 +58,7 @@ public class ExpensesService {
         return expensesRepository.save(expense);
     }
 
-    @Transactional
+
     public Expenses updateExpense(Long id, UpdateExpenseDTO updateExpenseDTO) {
         Expenses existingExpense = expensesRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
@@ -65,7 +66,7 @@ public class ExpensesService {
         return expensesRepository.save(existingExpense);
     }
 
-    @Transactional
+
     public void deleteExpense(Long id) {
         expensesRepository.deleteById(id);
     }

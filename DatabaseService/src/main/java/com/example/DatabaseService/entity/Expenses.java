@@ -27,18 +27,18 @@ public class Expenses {
     private Users user;
 
 
-    @Column(name = "amount")
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Categories category;
 
-    @Column(name = "notes")
+    @Column(name = "notes",nullable = false)
     private String notes;
 
 
-    @Column(name = "date")
+    @Column(name = "date",nullable = false)
     private Date date;
 
 

@@ -3,12 +3,14 @@ package com.example.DatabaseService.service;
 import com.example.DatabaseService.DTO.CreateCategoryDTO;
 import com.example.DatabaseService.entity.Categories;
 import com.example.DatabaseService.repository.CategoriesRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CategoriesService {
 
     private final CategoriesRepository categoriesRepository;
