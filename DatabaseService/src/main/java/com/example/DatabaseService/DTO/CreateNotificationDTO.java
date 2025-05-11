@@ -2,16 +2,21 @@ package com.example.DatabaseService.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
 
 @Setter
 @Getter
-public class NotificationsDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateNotificationDTO {
 
-    @NotNull(message = "User ID is required")
+    @NotNull
     private Long userId;
 
     @NotBlank(message = "Message is required")
@@ -23,17 +28,7 @@ public class NotificationsDTO {
     @NotBlank(message = "Status is required")
     private String status;
 
-    @NotNull(message = "Sent date is required")
+    @PastOrPresent (message = "Sent time must be in the present or the past")
     private Date sent_At;
 
-    public NotificationsDTO() {
-    }
-
-    public NotificationsDTO(Long userId, String msg, String type, String status, Date sentAt) {
-        this.userId = userId;
-        this.msg = msg;
-        this.type = type;
-        this.status = status;
-        this.sent_At = sentAt;
-    }
 }

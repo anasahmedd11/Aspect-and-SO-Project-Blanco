@@ -1,7 +1,9 @@
 package com.example.DatabaseService.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
@@ -9,6 +11,8 @@ import java.sql.Date;
 @Entity
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Notifications{
 
     @Id
@@ -25,10 +29,8 @@ public class Notifications{
     private String Status;
     private Date sent_At;
 
-    public Notifications() {
-    }
-    public Notifications(long user_id, String msg, String type, String Status, Date sent_At) {
-        this.user_id = user_id;
+    public Notifications(Users user, String msg, String type, String Status, Date sent_At) {
+        this.user = user;
         this.msg = msg;
         this.type = type;
         this.Status = Status;

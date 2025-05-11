@@ -1,8 +1,10 @@
 package com.example.DatabaseService.controller;
 
-import com.example.DatabaseService.DTO.NotificationsDTO;
+import com.example.DatabaseService.DTO.CreateNotificationDTO;
+import com.example.DatabaseService.DTO.UpdateNotificationDTO;
 import com.example.DatabaseService.entity.Notifications;
-import com.example.DatabaseService.repository.NotificationsRepository;
+import com.example.DatabaseService.service.NotificationsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,53 +13,41 @@ import java.util.List;
 @RequestMapping("api/notifications")
 public class NotificationsController {
 
-    private NotificationsRepository notificationsRepository;
+    private final NotificationsService notificationsService;
+
+    @Autowired
+    public NotificationsController(NotificationsService notificationsService) {
+        this.notificationsService = notificationsService;
+    }
+
 
     @GetMapping("get-notifications")
-    public List<NotificationsDTO> getNotifications(){
-        return notificationsRepository.findAll();
+    public List<Notifications> getNotifications(){
+        return notificationsService.getAllNotifications();
     }
 
     @GetMapping("get-notifications/{id}")
-    public NotificationsDTO getNotifications(@PathVariable long id){
-        return notificationsRepository.findById(id).orElse(null);
+    public Notifications getNotifications(@PathVariable long id){
+        return notificationsService.getNotificationById(id);
     }
 
 
     @PostMapping("add-notifications")
-    public void addNotification(@RequestBody NotificationsDTO notifications){
-        notificationsRepository.save(notifications);
+    public void addNotification(@RequestBody CreateNotificationDTO notificationsDTO){
+        notificationsService.addNotification(notificationsDTO);
     }
 
     @PutMapping("update-notifications/{id}")
-    public NotificationsDTO updateNotifications(@PathVariable long id, @RequestBody NotificationsDTO notifications){
-
-        NotificationsDTO updateNotifications = notificationsRepository.findById(id).orElse(null);
-        if(updateNotifications != null){
-            updateNotifications.setMsg(notifications.getMsg());
-            updateNotifications.setStatus(notifications.getStatus());
-            updateNotifications.setType(notifications.getType());
-            updateNotifications.setSent_At(notifications.getSent_At());
-            notificationsRepository.save(updateNotifications);
-            return updateNotifications;
-        }
-        return null;
+    public Notifications updateNotifications(@PathVariable long id, @RequestBody UpdateNotificationDTO notificationsDTO){
+        return notificationsService.updateNotification(notificationsDTO, id);
     }
 
     @DeleteMapping("delete-notification/{id}")
-    public boolean deleteNotification(@PathVariable long id, @RequestBody NotificationsDTO notifications){
-        if(notificationsRepository.findById(id).isPresent()){
-            notificationsRepository.delete(notifications);
-            return true;
-        }
-        return false;
+    public boolean deleteNotification(@PathVariable long id){
+        return notificationsService.deleteNotification(id);
     }
 
-    @DeleteMapping("delete-notifications")
-    public boolean deleteNotifications(@RequestBody NotificationsDTO notifications){
-        notificationsRepository.delete(notifications);
-        return true;
-    }
+
 
 
 
