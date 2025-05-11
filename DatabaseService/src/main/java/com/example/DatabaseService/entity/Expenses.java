@@ -22,6 +22,9 @@ public class Expenses {
     private Long id;
 
     // user object from table users
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private Users user;
 
 
     @Column(name = "amount")
@@ -29,7 +32,7 @@ public class Expenses {
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
-    private Categories Category;
+    private Categories category;
 
     @Column(name = "notes")
     private String notes;
@@ -37,6 +40,15 @@ public class Expenses {
 
     @Column(name = "date")
     private Date date;
+
+
+    public Expenses(Users user, Double amount, Categories category, String notes, Date date) {
+        this.user = user;
+        this.amount = amount;
+        this.category = category;
+        this.notes = notes;
+        this.date = date;
+    }
 
 
 

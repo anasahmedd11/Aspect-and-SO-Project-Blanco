@@ -24,9 +24,9 @@ public class Categories {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "Category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Expenses> expenses;
 
-    @OneToMany(mappedBy = "Category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Budgets> budgets;
 }
