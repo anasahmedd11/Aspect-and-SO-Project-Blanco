@@ -27,5 +27,6 @@ public class Categories {
     @OneToMany(mappedBy = "Category", cascade = CascadeType.ALL)
     private List<Expenses> expenses;
 
-
+    @OneToMany(mappedBy = "Category", cascade = CascadeType.ALL)
+    private List<Budgets> budgets;
 }
