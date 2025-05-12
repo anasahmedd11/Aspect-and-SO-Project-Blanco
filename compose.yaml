@@ -1,7 +1,7 @@
 services:
   Blanco-mysql:
     image: mysql:latest
-    container_name: Blanco-user-mysql
+    container_name: Blanco_mysql
     environment:
       MYSQL_DATABASE: Blanco_DB
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
@@ -12,6 +12,30 @@ services:
     volumes:
       - Blanco_DB_data:/var/lib/mysql
     restart: unless-stopped
+    networks:
+      - service-communication
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+
+  Blanco-db-service:
+    image: blanco-db-service
+    container_name: Blanco_db
+    build:
+      context: DatabaseService
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      Blanco-mysql:
+        condition: service_healthy
+        restart: true
+    networks:
+      - service-communication
+
+networks:
+  service-communication:
 
 volumes:
   Blanco_DB_data:

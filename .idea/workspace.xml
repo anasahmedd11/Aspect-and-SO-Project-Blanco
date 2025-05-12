@@ -5,7 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e7e1db5-2ee7-4e49-9fea-786b26ac2ad9" name="Changes" comment="fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthenticationService/src/main/java/com/example/AuthenticationService/Security/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationService/src/main/java/com/example/AuthenticationService/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationService/src/main/java/com/example/AuthenticationService/security/AuthEntryPointJWT.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationService/src/main/java/com/example/AuthenticationService/Security/AuthEntryPointJWT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthenticationService/src/main/java/com/example/AuthenticationService/security/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/AuthenticationService/src/main/java/com/example/AuthenticationService/Security/AuthTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseService/src/main/java/com/example/DatabaseService/entity/Notifications.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseService/src/main/java/com/example/DatabaseService/entity/Notifications.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseService/src/main/java/com/example/DatabaseService/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseService/src/main/java/com/example/DatabaseService/entity/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DatabaseService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +56,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.DatabaseServiceApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Spring Boot.AuthenticationServiceApplication">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\20120\Desktop\Semester10\Aspect\Project\Blanco\AuthenticationService\src\main\java\com\example\AuthenticationService" />
+      <recent name="C:\Users\20120\Desktop\Semester10\Aspect\Project\Blanco\AuthenticationService\src\main\java\com\example\AuthenticationService\security" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DatabaseServiceApplication">
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
       <module name="AuthenticationService" />
       <option name="filePath" />
@@ -161,5 +182,9 @@
     <MESSAGE value="adding AuthEntryPointJWT and repository layer" />
     <MESSAGE value="fixes" />
     <option name="LAST_COMMIT_MESSAGE" value="fixes" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

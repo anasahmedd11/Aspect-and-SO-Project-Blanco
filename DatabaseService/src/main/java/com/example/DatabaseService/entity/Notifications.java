@@ -21,9 +21,8 @@ public class Notifications{
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-
     private Users user;
-    private long user_id;
+
     private String msg;
     private String type;
     private String Status;
