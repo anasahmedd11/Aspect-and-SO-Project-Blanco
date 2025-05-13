@@ -33,4 +33,5 @@ public class CategoriesController {
     public ResponseEntity<List<CategoriesDTO>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
+
 }
