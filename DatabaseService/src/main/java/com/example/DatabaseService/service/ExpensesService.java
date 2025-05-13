@@ -71,4 +71,10 @@ public class ExpensesService {
         expensesRepository.deleteById(id);
     }
 
+    public List<Expenses> getAllUserExpenses(Long userId) {
+        Users existingUser = usersRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        return expensesRepository.findByUserId(existingUser.getId());
+    }
+
 }

@@ -59,4 +59,13 @@ public class ExpensesController {
         expensesService.deleteExpense(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Expenses>> getAllUserExpenses(@PathVariable Long userId) {
+        List<Expenses> expenses = expensesService.getAllUserExpenses(userId);
+        if (expenses != null && !expenses.isEmpty()) {
+            return ResponseEntity.ok(expenses);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
