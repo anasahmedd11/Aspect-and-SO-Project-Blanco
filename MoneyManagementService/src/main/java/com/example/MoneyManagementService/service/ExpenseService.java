@@ -11,6 +11,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Date;
 
 @Service
 public class ExpenseService {
@@ -86,9 +87,10 @@ public class ExpenseService {
         return Arrays.asList(response.getBody());
     }
 
-    public List<Expenses> getExpensesByDateRange(Long userId, String startDate, String endDate) {
-        String url = databaseServiceUrl + "/user/" + userId + "/date-range?startDate=" + startDate + "&endDate=" + endDate;
+    public List<Expenses> getExpensesByDate(Long userId, Date date) {
+        String url = databaseServiceUrl + "/user/" + userId + "/date/" + date;
         ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
         return Arrays.asList(response.getBody());
     }
+
 }

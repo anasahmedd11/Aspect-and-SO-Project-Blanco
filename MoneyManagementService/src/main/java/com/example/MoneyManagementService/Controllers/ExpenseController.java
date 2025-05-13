@@ -1,4 +1,5 @@
 package com.example.MoneyManagementService.Controllers;
+
 import com.example.MoneyManagementService.DTO.ExpenseDTO;
 import com.example.MoneyManagementService.entity.Expenses;
 import com.example.MoneyManagementService.service.ExpenseService;
@@ -7,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,14 +70,15 @@ public class ExpenseController {
         return ResponseEntity.ok(expenses);
     }
 
-    @GetMapping("/user/{userId}/date-range")
-    public ResponseEntity<List<Expenses>> getExpensesByDateRange(@PathVariable Long userId,
-                                                                 @RequestParam String startDate,
-                                                                 @RequestParam String endDate) {
-        List<Expenses> expenses = expenseService.getExpensesByDateRange(userId, startDate, endDate);
+    @GetMapping("/user/{userId}/date/{date}")
+    public ResponseEntity<List<Expenses>> getExpensesByDate(@PathVariable Long userId, @PathVariable Date date) {
+        List<Expenses> expenses = expenseService.getExpensesByDate(userId, date);
         if (expenses.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(expenses);
     }
+
 }
+
+
