@@ -21,7 +21,7 @@ public class Expenses {
     @Column(name = "id")
     private Long id;
 
-    // user object from table users
+    // user_id object from table users
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;

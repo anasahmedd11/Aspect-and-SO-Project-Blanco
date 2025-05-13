@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ExpensesRepository extends JpaRepository<Expenses, Long> {
     // Custom query methods can be defined here if needed
-    // For example, find by user ID or date range
+    // For example, find by user_id ID or date range
 }
