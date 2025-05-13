@@ -55,7 +55,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.DatabaseServiceApplication.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Boudy",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "E:/SPRING25 - FINAL/Aspect-and-SO-Project-Blanco",
@@ -123,7 +123,7 @@
       <workItem from="1747038853362" duration="164000" />
       <workItem from="1747050480533" duration="436000" />
       <workItem from="1747157487341" duration="447000" />
-      <workItem from="1747164535883" duration="379000" />
+      <workItem from="1747164535883" duration="725000" />
     </task>
     <task id="LOCAL-00001" summary="adding dependencies">
       <option name="closed" value="true" />
@@ -197,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747164774425</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixes">
+      <option name="closed" value="true" />
+      <created>1747165001533</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1747165001533</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
