@@ -9,7 +9,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class Transactions {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
