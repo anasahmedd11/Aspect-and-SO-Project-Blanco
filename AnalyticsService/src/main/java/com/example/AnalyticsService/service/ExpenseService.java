@@ -43,6 +43,16 @@ public class ExpenseService {
         }
     }
 
+    public List<Expenses> getUserMonthlyExpenses(Long userId) {
+        String url = baseurl + "/user/" + userId + "/monthly-report";
+        ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
+        return Arrays.asList(response.getBody());
+    }
 
+    public List<Expenses> getUserWeeklyExpenses(Long userId) {
+        String url = baseurl + "/user/" + userId + "/weekly-report";
+        ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
+        return Arrays.asList(response.getBody());
+    }
 
 }

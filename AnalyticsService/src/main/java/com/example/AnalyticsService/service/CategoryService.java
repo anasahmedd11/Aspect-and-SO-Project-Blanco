@@ -20,8 +20,9 @@ public class CategoryService {
         this.restTemplate = restTemplate;
     }
 
-    public BarChartDataDTO getBarChartData() {
-        CategoryExpenseDTO[] data = restTemplate.getForObject(databaseServiceUrl, CategoryExpenseDTO[].class);
+    public BarChartDataDTO getBarChartData(Long id) {
+        String url = databaseServiceUrl + "/user/" + id + "/bar-chart-data";
+        CategoryExpenseDTO[] data = restTemplate.getForObject(url, CategoryExpenseDTO[].class);
 
         List<String> xValues = new ArrayList<>();
         List<Double> yValues = new ArrayList<>();

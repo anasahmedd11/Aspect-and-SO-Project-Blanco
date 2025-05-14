@@ -4,6 +4,7 @@ import com.example.AnalyticsService.DTO.BarChartDataDTO;
 import com.example.AnalyticsService.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,8 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/bar-chart-data")
-    public BarChartDataDTO getBarChartData() {
-        return categoryService.getBarChartData();
+    @GetMapping("/user/{id}/bar-chart-data")
+    public BarChartDataDTO getBarChartData(@PathVariable Long id) {
+        return categoryService.getBarChartData(id);
     }
 }

@@ -41,9 +41,9 @@ public class ExpensesController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/expenses-by-category")
-    public List<CategoryExpenseDTO> getExpensesByCategory() {
-        return expensesService.getTotalExpenseAmountByCategory();
+    @GetMapping("/user/{id}/expenses-by-category")
+    public List<CategoryExpenseDTO> getExpensesByCategory(@PathVariable Long userId) {
+        return expensesService.getTotalExpenseAmountByCategory(userId);
     }
 
     //Generate Monthly Report

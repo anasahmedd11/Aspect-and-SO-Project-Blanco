@@ -103,7 +103,7 @@ public class ExpensesService {
         return expensesRepository.findByUserIdAndDate(existingUser.getId(), date);
     }
 
-    public List<CategoryExpenseDTO> getTotalExpenseAmountByCategory() {
-        return expensesRepository.findTotalExpenseAmountByCategory();
+    public List<CategoryExpenseDTO> getTotalExpenseAmountByCategory(Long userId) {
+        return expensesRepository.findTotalExpenseAmountByCategory(userId);
     }
 }

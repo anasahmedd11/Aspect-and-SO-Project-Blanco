@@ -21,7 +21,7 @@ public interface ExpensesRepository extends JpaRepository<Expenses, Long> {
     List<Expenses> getUserExpenses(@Param("startDate") Date startDate, @Param("userId") Long userId);
 
     //top query from Mohamed Khaled
-    @Query("SELECT e.category.name , SUM(e.amount) FROM Expenses e  GROUP BY e.category.name")
-    List<CategoryExpenseDTO> findTotalExpenseAmountByCategory();
+    @Query("SELECT e.category.name , SUM(e.amount) FROM Expenses e WHERE e.user.id == :userId  GROUP BY e.category.name")
+    List<CategoryExpenseDTO> findTotalExpenseAmountByCategory(@Param("userId") Long userId);
 
 }
