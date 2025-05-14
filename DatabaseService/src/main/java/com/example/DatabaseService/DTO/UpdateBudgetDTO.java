@@ -11,10 +11,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class UpdateBudgetDTO {
     @PositiveOrZero(message = "Current amount must be positive")
-    private int currentAmount;
+    private double currentAmount;
 
     @PositiveOrZero(message = "Limit amount must be positive")
-    private int limitAmount;
+    private double limitAmount;
 
     @FutureOrPresent(message = "Created at must be in the future or present")
     private Date createdAt;

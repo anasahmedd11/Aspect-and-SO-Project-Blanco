@@ -14,14 +14,14 @@ import java.util.Date;
 public class Budgets {
 
     private Long id;
-    private int currentAmount;
-    private int limitAmount;
+    private double currentAmount;
+    private double limitAmount;
     private Date createdAt;
     private Date expiresAt;
     private Long user_id;
     private Categories category;
 
-    public Budgets(int currentAmount, int limitAmount, Date createdAt, Date expiresAt, long user, Categories category) {
+    public Budgets(double currentAmount, double limitAmount, Date createdAt, Date expiresAt, long user, Categories category) {
         this.currentAmount = currentAmount;
         this.limitAmount = limitAmount;
         this.createdAt = createdAt;

@@ -21,10 +21,10 @@ public class Budgets {
     private Long id;
 
     @Column(name = "current_amount", nullable = false)
-    private int currentAmount;
+    private double currentAmount;
 
     @Column(name = "limit_amount", nullable = false)
-    private int limitAmount;
+    private double limitAmount;
 
     @Column(name = "created_at", nullable = false)
     private Date createdAt;
@@ -40,7 +40,7 @@ public class Budgets {
     @JoinColumn(name = "category_id", nullable = false)
     private Categories category;
 
-    public Budgets(int currentAmount, int limitAmount, Date createdAt, Date expiresAt, Users user, Categories category) {
+    public Budgets(double currentAmount, double limitAmount, Date createdAt, Date expiresAt, Users user, Categories category) {
         this.currentAmount = currentAmount;
         this.limitAmount = limitAmount;
         this.createdAt = createdAt;

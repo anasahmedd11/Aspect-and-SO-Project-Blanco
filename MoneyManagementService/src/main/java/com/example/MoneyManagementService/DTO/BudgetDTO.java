@@ -15,8 +15,8 @@ import java.util.Date;
 @AllArgsConstructor
 
 public class BudgetDTO {
-    private int currentAmount;
-    private int limitAmount;
+    private double currentAmount;
+    private double limitAmount;
     private Date createdAt;
     private Date expiresAt;
     private Long user_id;
