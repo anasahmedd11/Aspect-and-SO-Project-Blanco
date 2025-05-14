@@ -28,8 +28,7 @@ public class BudgetService {
 
     public Budgets getBudgetById(Long id) {
         String url = baseurl + "/" + id;
-        Budgets budget = restTemplate.getForObject(url, Budgets.class);
-        return budget;
+        return restTemplate.getForObject(url, Budgets.class);
     }
 
     public List<Budgets> getBudgetsByCategoryId(Long categoryId) {

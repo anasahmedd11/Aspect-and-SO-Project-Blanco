@@ -26,6 +26,16 @@ public class BudgetController {
         return budgetService.getAllBudgets(id);
     }
 
+    @GetMapping("/{id}")
+    public Budgets getBudgetById(@PathVariable Long id) {
+        return budgetService.getBudgetById(id);
+    }
+
+    @GetMapping("/category/{id}")
+    public List<Budgets> getBudgetsByCategoryId(@PathVariable Long id) {
+        return budgetService.getBudgetsByCategoryId(id);
+    }
+
 
 
 
