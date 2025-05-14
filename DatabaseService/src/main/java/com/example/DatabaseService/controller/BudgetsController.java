@@ -38,6 +38,12 @@ public class BudgetsController {
         }
     }
 
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<Budgets>> getBudgetsByCategoryId(@PathVariable Long id) {
+        List<Budgets> budgets = budgetsService.getBudgetsByCategoryId(id);
+        return new ResponseEntity<>(budgets, HttpStatus.OK);
+    }
+
 
     @PostMapping
     public ResponseEntity<Budgets> createBudget(@Valid @RequestBody CreateBudgetDTO budgetDTO) {

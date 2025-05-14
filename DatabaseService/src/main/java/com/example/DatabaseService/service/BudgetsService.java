@@ -63,6 +63,10 @@ public class BudgetsService {
         return budgetsRepository.save(existingBudget);
     }
 
+    public List<Budgets> getBudgetsByCategoryId(Long categoryId) {
+        return budgetsRepository.findByCategoryId(categoryId);
+    }
+
     public void deleteBudget(Long id) {
         budgetsRepository.deleteById(id);
     }
