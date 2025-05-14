@@ -16,7 +16,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class CreateExpenseDTO {
 
-
     @NotNull(message = "User ID is required")
     private Long userId;
 
@@ -29,9 +28,5 @@ public class CreateExpenseDTO {
 
     @Size(max = 255, message = "Notes cannot exceed 255 characters")
     private String notes;
-
-    @NotNull(message = "Date is required")
-    private Date date;
-
 
 }

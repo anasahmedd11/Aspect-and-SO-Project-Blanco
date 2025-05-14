@@ -14,6 +14,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +40,7 @@ public class ExpensesService {
     public List<Expenses> getAllExpenses() {
         return expensesRepository.findAll();
     }
+
     public Expenses getExpenseById(Long id) {
         return expensesRepository.findById(id).orElse(null);
     }
@@ -55,7 +58,7 @@ public class ExpensesService {
                 createExpenseDTO.getAmount(),
                 existingCategory,
                 createExpenseDTO.getNotes(),
-                createExpenseDTO.getDate()
+                new Date()
         );
         return expensesRepository.save(expense);
     }
@@ -77,6 +80,18 @@ public class ExpensesService {
         Users existingUser = usersRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
         return expensesRepository.findByUserId(existingUser.getId());
+    }
+
+    public List<Expenses> getUserDailyExpenses(Long userId) {
+        LocalDate firstDateOfMonth = LocalDate.now().withDayOfMonth(1);
+        Date startDate = Date.from(firstDateOfMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return expensesRepository.findUserDailyExpenses(startDate, userId);
+    }
+
+    public List<Expenses> getUserWeeklyExpenses(Long userId) {
+        LocalDate firstDateOfMonth = LocalDate.now().withDayOfMonth(1);
+        Date startDate = Date.from(firstDateOfMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return expensesRepository.findUserDailyExpenses(startDate, userId);
     }
 
     // get expenses by date
