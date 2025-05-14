@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,10 +20,10 @@ public class Expenses {
     private Double amount;
     private Long categoryId;
     private String notes;
-    private String date;
+    private Date date;
 
 
-    public Expenses(Long userId, Double amount, Long categoryId, String notes, String date) {
+    public Expenses(Long userId, Double amount, Long categoryId, String notes, Date date) {
         this.userId = userId;
         this.amount = amount;
         this.categoryId = categoryId;

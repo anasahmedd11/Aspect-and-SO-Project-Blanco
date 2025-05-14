@@ -26,7 +26,7 @@ public class TransactionService {
 
 
     public List<Transactions> getAllUserTransactions(Long userId) {
-        return transactionRepository.findByUserId(userId);
+        return transactionRepository.findBySenderId(userId);
     }
 
     public Transactions createTransaction(CreateTransactionDTO transactionDTO) {

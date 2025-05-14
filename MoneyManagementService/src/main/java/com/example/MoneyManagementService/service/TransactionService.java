@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class TransactionService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceTransactionUrl = "/transaction";
+    private final String databaseServiceTransactionUrl = "http://localhost:8080/db-service/expenses/transaction";
 
     @Autowired
     public TransactionService(RestTemplate restTemplate) {

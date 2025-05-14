@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class CategoriesService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "/db-service/";
+    private final String databaseServiceUrl = "http://localhost:8080/db-service/expenses/db-service/";
 
     @Autowired
     public CategoriesService(RestTemplate restTemplate) {

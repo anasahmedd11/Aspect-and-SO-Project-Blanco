@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class ExpenseDTO {
     private Double amount;
     private Long categoryId;
     private String notes;
-    private String date;
+    private Date date;
 
 
 }

@@ -17,7 +17,7 @@ import java.util.Date;
 public class ExpenseService {
     private final RestTemplate restTemplate;
     // Replace with your actual DatabaseService host and port
-    private final String databaseServiceUrl = "/db-service/expenses";
+    private final String databaseServiceUrl = "http://localhost:8080/db-service/expenses";
 
     @Autowired
     public ExpenseService(RestTemplate restTemplate) {
