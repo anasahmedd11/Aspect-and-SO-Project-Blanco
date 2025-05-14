@@ -1,7 +1,9 @@
 package com.example.DatabaseService.repository;
 
+import com.example.DatabaseService.DTO.CategoryExpenseDTO;
 import com.example.DatabaseService.entity.Expenses;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -9,12 +11,13 @@ import java.util.List;
 
 @Repository
 public interface ExpensesRepository extends JpaRepository<Expenses, Long> {
-    // Custom query methods can be defined here if needed
-    // For example, find by user_id ID or date range
 
     List<Expenses> findByUserId(Long userId);
 
     List<Expenses> findByUserIdAndDate(Long userId, Date endDate);
 
+    //top query from Mohamed Khaled
+    @Query("SELECT e.category.name , SUM(e.amount) FROM Expenses e  GROUP BY e.category.name")
+    List<CategoryExpenseDTO> findTotalExpenseAmountByCategory();
 
 }
