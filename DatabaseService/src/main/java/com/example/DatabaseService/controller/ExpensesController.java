@@ -1,5 +1,6 @@
 package com.example.DatabaseService.controller;
 
+import com.example.DatabaseService.DTO.CategoryExpenseDTO;
 import com.example.DatabaseService.DTO.CreateExpenseDTO;
 import com.example.DatabaseService.DTO.UpdateExpenseDTO;
 import com.example.DatabaseService.entity.Expenses;
@@ -38,6 +39,11 @@ public class ExpensesController {
             return ResponseEntity.ok(expense);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/expenses-by-category")
+    public List<CategoryExpenseDTO> getExpensesByCategory() {
+        return expensesService.getTotalExpenseAmountByCategory();
     }
 
     @PostMapping
@@ -81,4 +87,5 @@ public class ExpensesController {
         }
         return ResponseEntity.notFound().build();
     }
+
 }

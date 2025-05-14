@@ -1,5 +1,6 @@
 package com.example.DatabaseService.service;
 
+import com.example.DatabaseService.DTO.CategoryExpenseDTO;
 import com.example.DatabaseService.DTO.CreateExpenseDTO;
 import com.example.DatabaseService.DTO.UpdateExpenseDTO;
 import com.example.DatabaseService.entity.Categories;
@@ -100,4 +101,7 @@ public class ExpensesService {
         return expensesRepository.findByUserIdAndDate(existingUser.getId(), date);
     }
 
+    public List<CategoryExpenseDTO> getTotalExpenseAmountByCategory() {
+        return expensesRepository.findTotalExpenseAmountByCategory();
+    }
 }
