@@ -20,7 +20,7 @@ public class BudgetDTO {
     private Date createdAt;
     private Date expiresAt;
     private Long user_id;
-    private Categories category;
+    private Long category_id;
 
 
 }

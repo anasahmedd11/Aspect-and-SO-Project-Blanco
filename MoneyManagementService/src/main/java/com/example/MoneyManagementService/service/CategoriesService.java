@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class CategoriesService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://localhost:8080/db-service/expenses/db-service/";
+    private final String databaseServiceUrl = "http://localhost:8080/db-service/categories";
 
     @Autowired
     public CategoriesService(RestTemplate restTemplate) {
@@ -24,7 +24,7 @@ public class CategoriesService {
 
     public List<Categories> getAllCategories() {
         Categories[] categories = restTemplate.getForObject(
-                databaseServiceUrl + "/categories/",
+                databaseServiceUrl,
                 Categories[].class
         );
         return Arrays.asList(categories);
@@ -32,14 +32,14 @@ public class CategoriesService {
 
     public Categories getCategoryById(Long id) {
         return restTemplate.getForObject(
-                databaseServiceUrl + "/categories/" + id,
+                databaseServiceUrl + id,
                 Categories.class
         );
     }
 
     public Categories createCategory(CategoriesDTO categoryDTO) {
         return restTemplate.postForObject(
-                databaseServiceUrl + "/categories/",
+                databaseServiceUrl,
                 categoryDTO,
                 Categories.class
         );

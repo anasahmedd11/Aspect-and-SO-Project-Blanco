@@ -15,8 +15,7 @@ import java.util.Optional;
 @Service
 public class BudgetService {
     private final RestTemplate restTemplate;
-    // Replace with your actual DatabaseService host and port
-    private final String databaseServiceUrl = "http://localhost:8080/db-service/expenses/db-service/budgets";
+    private final String databaseServiceUrl = "http://localhost:8080/db-service/budgets";
 
     @Autowired
     public BudgetService(RestTemplate restTemplate) {

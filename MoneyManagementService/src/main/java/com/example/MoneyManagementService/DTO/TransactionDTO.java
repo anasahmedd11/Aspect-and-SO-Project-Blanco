@@ -13,5 +13,5 @@ import lombok.Setter;
 public class TransactionDTO {
     private Long sender_id;
     private Long receiver_id;
-    private Expenses expenses;
+    private Long expenses_id;
 }

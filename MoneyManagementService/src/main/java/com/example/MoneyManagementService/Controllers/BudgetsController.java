@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/budgets")
+@RequestMapping("/money-management/budgets")
 public class BudgetsController {
 
     private final BudgetService budgetService;

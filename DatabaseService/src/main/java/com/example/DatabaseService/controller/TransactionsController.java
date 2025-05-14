@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/db-service/transaction")
 public class TransactionsController {
 
     private final TransactionService transactionService;

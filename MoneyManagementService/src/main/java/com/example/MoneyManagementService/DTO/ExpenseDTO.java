@@ -19,6 +19,4 @@ public class ExpenseDTO {
     private Long categoryId;
     private String notes;
     private Date date;
-
-
 }
