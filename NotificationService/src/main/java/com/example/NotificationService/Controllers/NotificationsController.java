@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/notifications")
+@RequestMapping("/notification-service/notifications")
 public class NotificationsController {
     private final NotificationsService notificationService;
 
@@ -25,7 +25,7 @@ public class NotificationsController {
     }
 
     // Budget-related endpoints
-    @PostMapping("/notifications/budget/limit")
+    @PostMapping("/budget/limit")
     public ResponseEntity<Notifications> createBudgetLimitNotification(
             @RequestParam Long userId,
             @RequestParam String categoryName,
@@ -36,7 +36,7 @@ public class NotificationsController {
                 userId, categoryName, currentAmount, limitAmount, sentAt));
     }
 
-    @PostMapping("/notifications/budget/expiration")
+    @PostMapping("/budget/expiration")
     public ResponseEntity<Notifications> createBudgetExpirationNotification(
             @RequestParam Long userId,
             @RequestParam String categoryName,
@@ -45,7 +45,7 @@ public class NotificationsController {
                 userId, categoryName, expiresAt));
     }
 
-    @PostMapping("/notifications/budget/created")
+    @PostMapping("/budget/created")
     public ResponseEntity<Notifications> createBudgetCreatedNotification(
             @RequestParam Long userId,
             @RequestParam String categoryName,
@@ -55,7 +55,7 @@ public class NotificationsController {
                 userId, categoryName, limitAmount, sentAt));
     }
 
-    @PostMapping("/notifications/expense/created")
+    @PostMapping("/expense/created")
     public ResponseEntity<Notifications> createExpenseNotification(
             @RequestParam Long userId,
             @RequestParam String categoryName,
@@ -66,7 +66,7 @@ public class NotificationsController {
                 userId, categoryName, amount, notes, sentAt));
     }
 
-    @PostMapping("/notifications/expense/updated")
+    @PostMapping("/expense/updated")
     public ResponseEntity<Notifications> createExpenseUpdatedNotification(
             @RequestParam Long userId,
             @RequestParam String categoryName,
@@ -77,7 +77,7 @@ public class NotificationsController {
                 userId, categoryName, oldAmount, newAmount, sentAt));
     }
 
-    @PostMapping("/notifications/transaction/sent")
+    @PostMapping("/transaction/sent")
     public ResponseEntity<Notifications> createTransactionSentNotification(
             @RequestParam Long userId,
             @RequestParam Long receiverId,
@@ -87,7 +87,7 @@ public class NotificationsController {
                 userId, receiverId, amount, sentAt));
     }
 
-    @PostMapping("/notifications/transaction/received")
+    @PostMapping("/transaction/received")
     public ResponseEntity<Notifications> createTransactionReceivedNotification(
             @RequestParam Long userId,
             @RequestParam Long senderId,
@@ -97,7 +97,7 @@ public class NotificationsController {
                 userId, senderId, amount, sentAt));
     }
 
-    @PostMapping("/notifications/category/created")
+    @PostMapping("/category/created")
     public ResponseEntity<Notifications> createCategoryCreatedNotification(
             @RequestParam Long userId,
             @RequestParam String categoryName,
@@ -106,7 +106,7 @@ public class NotificationsController {
                 userId, categoryName, sentAt));
     }
 
-    @PostMapping("/notifications/category/updated")
+    @PostMapping("/category/updated")
     public ResponseEntity<Notifications> createCategoryUpdatedNotification(
             @RequestParam Long userId,
             @RequestParam String oldName,

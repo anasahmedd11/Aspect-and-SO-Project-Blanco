@@ -36,6 +36,7 @@ public class NotificationsService {
     public void addNotification(CreateNotificationDTO notificationsDTO) {
 
         Long userId = notificationsDTO.getUserId();
+        System.out.println(userId);
         Users user = usersRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
 

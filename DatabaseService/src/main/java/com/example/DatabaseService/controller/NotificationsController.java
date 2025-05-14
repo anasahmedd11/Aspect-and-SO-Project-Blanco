@@ -21,34 +21,30 @@ public class NotificationsController {
     }
 
 
-    @GetMapping("get-notifications")
-    public List<Notifications> getNotifications(){
+    @GetMapping
+    public List<Notifications> getNotifications() {
         return notificationsService.getAllNotifications();
     }
 
-    @GetMapping("get-notifications/{id}")
-    public Notifications getNotifications(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public Notifications getNotifications(@PathVariable Long id) {
         return notificationsService.getNotificationById(id);
     }
 
-
-    @PostMapping("add-notifications")
-    public void addNotification(@RequestBody CreateNotificationDTO notificationsDTO){
+    @PostMapping
+    public void addNotification(@RequestBody CreateNotificationDTO notificationsDTO) {
         notificationsService.addNotification(notificationsDTO);
     }
 
-    @PutMapping("update-notifications/{id}")
-    public Notifications updateNotifications(@PathVariable Long id, @RequestBody UpdateNotificationDTO notificationsDTO){
+    @PutMapping("/{id}")
+    public Notifications updateNotifications(@PathVariable Long id, @RequestBody UpdateNotificationDTO notificationsDTO) {
         return notificationsService.updateNotification(notificationsDTO, id);
     }
 
-    @DeleteMapping("delete-notification/{id}")
-    public boolean deleteNotification(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public boolean deleteNotification(@PathVariable Long id) {
         return notificationsService.deleteNotification(id);
     }
-
-
-
 
 
 }

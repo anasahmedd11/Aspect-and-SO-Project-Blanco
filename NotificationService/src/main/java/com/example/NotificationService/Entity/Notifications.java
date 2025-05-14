@@ -1,27 +1,25 @@
 package com.example.NotificationService.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Notifications {
 
     private Long id;
-    private Long user_id;
+    private Long userId;
     private String msg;
     private String type;
     private String Status;
     private Date sent_At;
 
-    public Notifications(Long user_id, String msg, String type, String Status, Date sent_At) {
-        this.user_id = user_id;
+    public Notifications(Long userId, String msg, String type, String Status, Date sent_At) {
+        this.userId = userId;
         this.msg = msg;
         this.type = type;
         this.Status = Status;

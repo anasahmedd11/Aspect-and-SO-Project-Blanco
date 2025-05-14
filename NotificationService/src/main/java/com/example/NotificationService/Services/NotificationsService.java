@@ -1,7 +1,5 @@
 package com.example.NotificationService.Services;
 
-
-import com.example.NotificationService.DTO.NotificationsDTO;
 import com.example.NotificationService.Entity.Notifications;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +12,7 @@ import java.util.List;
 @Service
 public class NotificationsService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://localhost:8080/db-service/expenses/db-service/";
+    private final String databaseServiceUrl = "http://localhost:8080/db-service/notifications";
 
     @Autowired
     public NotificationsService(RestTemplate restTemplate) {
@@ -23,17 +21,17 @@ public class NotificationsService {
 
     public List<Notifications> getUserNotifications(Long userId) {
         Notifications[] notifications = restTemplate.getForObject(
-                databaseServiceUrl + "/notifications/" + userId,
+                databaseServiceUrl + userId,
                 Notifications[].class
         );
         return Arrays.asList(notifications);
     }
 
     public Notifications createNotification(Long userId, String msg, String type, String status, Date sentAt) {
-        NotificationsDTO dto = new NotificationsDTO(userId, msg, type, status, sentAt);
+        Notifications notifications = new Notifications(userId, msg, type, status, sentAt);
         return restTemplate.postForObject(
-                databaseServiceUrl + "/notifications/",
-                dto,
+                databaseServiceUrl,
+                notifications,
                 Notifications.class
         );
     }
