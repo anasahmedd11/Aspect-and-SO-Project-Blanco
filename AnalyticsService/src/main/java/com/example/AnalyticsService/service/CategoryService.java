@@ -1,9 +1,12 @@
 package com.example.AnalyticsService.service;
 
-import com.example.AnalyticsService.entity.Budgets;
+import com.example.AnalyticsService.DTO.BarChartData;
+import com.example.AnalyticsService.DTO.CategoryExpense;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,9 +15,23 @@ public class CategoryService {
     private final RestTemplate restTemplate;
     private final String databaseServiceUrl = "http://localhost:8080/db-service/categories";
 
+    @Autowired
     public CategoryService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    public BarChartData getBarChartData() {
+        CategoryExpense[] data = restTemplate.getForObject(databaseServiceUrl, CategoryExpenseDTO[].class);
+
+        List<String> xValues = new ArrayList<>();
+        List<Double> yValues = new ArrayList<>();
+        if (data != null) {
+            for (CategoryExpense dto : data) {
+                xValues.add(dto.getCategoryName());
+                yValues.add(dto.getTotalAmount());
+            }
+        }
+        return new BarChartData(xValues, yValues);
+    }
 
 }
