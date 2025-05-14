@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.example.DatabaseService.service.NullPropertyNameHelper.getNullPropertyNames;
@@ -69,6 +70,19 @@ public class ExpensesService {
 
     public void deleteExpense(Long id) {
         expensesRepository.deleteById(id);
+    }
+
+    public List<Expenses> getAllUserExpenses(Long userId) {
+        Users existingUser = usersRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        return expensesRepository.findByUserId(existingUser.getId());
+    }
+
+    // get expenses by date
+    public List<Expenses> getExpensesByDate(Long userId, Date date) {
+        Users existingUser = usersRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        return expensesRepository.findByUserIdAndDate(existingUser.getId(), date);
     }
 
 }
