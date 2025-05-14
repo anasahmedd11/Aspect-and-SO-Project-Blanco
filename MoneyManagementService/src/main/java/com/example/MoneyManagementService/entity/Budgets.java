@@ -18,7 +18,7 @@ public class Budgets {
     private int limitAmount;
     private Date createdAt;
     private Date expiresAt;
-    private long user_id;
+    private Long user_id;
     private Categories category;
 
     public Budgets(int currentAmount, int limitAmount, Date createdAt, Date expiresAt, long user, Categories category) {

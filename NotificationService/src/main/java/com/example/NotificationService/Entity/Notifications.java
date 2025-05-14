@@ -13,14 +13,14 @@ import java.sql.Date;
 @NoArgsConstructor
 public class Notifications {
 
-    private long id;
-    private long user_id;
+    private Long id;
+    private Long user_id;
     private String msg;
     private String type;
     private String Status;
     private Date sent_At;
 
-    public Notifications(long user_id, String msg, String type, String Status, Date sent_At) {
+    public Notifications(Long user_id, String msg, String type, String Status, Date sent_At) {
         this.user_id = user_id;
         this.msg = msg;
         this.type = type;

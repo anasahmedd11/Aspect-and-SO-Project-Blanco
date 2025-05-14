@@ -29,7 +29,7 @@ public class NotificationsService {
         return notificationsRepository.findAll();
     }
 
-    public Notifications getNotificationById(long id) {
+    public Notifications getNotificationById(Long id) {
         return notificationsRepository.findById(id).orElse(null);
     }
 
@@ -49,7 +49,7 @@ public class NotificationsService {
         notificationsRepository.save(notifications);
     }
 
-    public Notifications updateNotification(UpdateNotificationDTO notificationsDTO, long id) {
+    public Notifications updateNotification(UpdateNotificationDTO notificationsDTO, Long id) {
         Notifications updateNotifications = notificationsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Budget not found with id: " + id));
 
@@ -64,7 +64,7 @@ public class NotificationsService {
         return null;
     }
 
-    public boolean deleteNotification(long id) {
+    public boolean deleteNotification(Long id) {
         if(notificationsRepository.findById(id).isPresent()){
             notificationsRepository.deleteById(id);
             return true;

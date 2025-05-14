@@ -14,7 +14,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class NotificationsDTO {
 
-    private long user_id;
+    private Long user_id;
     private String msg;
     private String type;
     private String Status;
