@@ -24,6 +24,7 @@ public class ExpensesController {
         this.expensesService = expensesService;
     }
 
+
     @GetMapping
     public List<Expenses> getAllExpenses() {
         return expensesService.getAllExpenses();
