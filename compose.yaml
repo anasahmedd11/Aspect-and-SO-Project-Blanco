@@ -34,6 +34,21 @@ services:
     networks:
       - service-communication
 
+  Blanco-MoneyManagementService:
+    image: blanco-money-management-service
+    container_name: Blanco_MoneyManagementService
+    build:
+      context: MoneyManagementService
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      Blanco-mysql:
+        condition: service_healthy
+        restart: true
+    networks:
+      - service-communication
+
 networks:
   service-communication:
 
