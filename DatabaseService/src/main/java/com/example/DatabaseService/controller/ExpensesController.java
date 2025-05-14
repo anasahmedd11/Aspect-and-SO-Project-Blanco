@@ -29,6 +29,7 @@ public class ExpensesController {
         return expensesService.getAllExpenses();
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Expenses> getExpenseById(@PathVariable Long id) {
         Expenses expense = expensesService.getExpenseById(id);

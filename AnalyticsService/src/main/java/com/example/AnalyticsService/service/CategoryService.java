@@ -9,7 +9,8 @@ import java.util.List;
 @Service
 public class CategoryService {
 
-    RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    private final String databaseServiceUrl = "http://localhost:8080/db-service/categories";
 
     public CategoryService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;

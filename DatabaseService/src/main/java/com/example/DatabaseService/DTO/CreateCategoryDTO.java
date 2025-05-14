@@ -22,6 +22,4 @@ public class CreateCategoryDTO {
     private String name;
 
 
-
-
 }
