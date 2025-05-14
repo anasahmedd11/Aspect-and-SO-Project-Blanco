@@ -46,6 +46,18 @@ public class ExpensesController {
         return expensesService.getTotalExpenseAmountByCategory();
     }
 
+    //Generate Monthly Report
+    @GetMapping("/user/{id}/monthly-report")
+    public List<Expenses> getMonthlyReport(@PathVariable Long id) {
+        return expensesService.getUserMonthlyExpenses(id);
+    }
+
+    //Generate Weekly Report
+    @GetMapping("/user/{id}/weekly-report")
+    public List<Expenses> getWeeklyReport(@PathVariable Long id) {
+        return expensesService.getUserWeeklyExpenses(id);
+    }
+
     @PostMapping
     public ResponseEntity<Expenses> createExpense(@Valid @RequestBody CreateExpenseDTO createExpenseDTO) {
         Expenses createdExpense = expensesService.createExpense(createExpenseDTO);
