@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryExpense {
+public class CategoryExpenseDTO {
     private String categoryName;
     private Double totalAmount;
 }

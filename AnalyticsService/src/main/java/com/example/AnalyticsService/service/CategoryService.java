@@ -1,7 +1,7 @@
 package com.example.AnalyticsService.service;
 
-import com.example.AnalyticsService.DTO.BarChartData;
-import com.example.AnalyticsService.DTO.CategoryExpense;
+import com.example.AnalyticsService.DTO.BarChartDataDTO;
+import com.example.AnalyticsService.DTO.CategoryExpenseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,18 +20,17 @@ public class CategoryService {
         this.restTemplate = restTemplate;
     }
 
-    public BarChartData getBarChartData() {
-        CategoryExpense[] data = restTemplate.getForObject(databaseServiceUrl, CategoryExpenseDTO[].class);
+    public BarChartDataDTO getBarChartData() {
+        CategoryExpenseDTO[] data = restTemplate.getForObject(databaseServiceUrl, CategoryExpenseDTO[].class);
 
         List<String> xValues = new ArrayList<>();
         List<Double> yValues = new ArrayList<>();
         if (data != null) {
-            for (CategoryExpense dto : data) {
+            for (CategoryExpenseDTO dto : data) {
                 xValues.add(dto.getCategoryName());
                 yValues.add(dto.getTotalAmount());
             }
         }
-        return new BarChartData(xValues, yValues);
+        return new BarChartDataDTO(xValues, yValues);
     }
-
 }
