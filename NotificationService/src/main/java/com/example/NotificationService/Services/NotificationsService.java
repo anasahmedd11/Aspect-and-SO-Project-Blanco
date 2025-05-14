@@ -23,7 +23,7 @@ public class NotificationsService {
 
     public List<Notifications> getUserNotifications(Long userId) {
         Notifications[] notifications = restTemplate.getForObject(
-                databaseServiceUrl + "/userNotifications/" + userId,
+                databaseServiceUrl + "/notifications/" + userId,
                 Notifications[].class
         );
         return Arrays.asList(notifications);
@@ -32,7 +32,7 @@ public class NotificationsService {
     public Notifications createNotification(Long userId, String msg, String type, String status, Date sentAt) {
         NotificationsDTO dto = new NotificationsDTO(userId, msg, type, status, sentAt);
         return restTemplate.postForObject(
-                databaseServiceUrl,
+                databaseServiceUrl + "/notifications/",
                 dto,
                 Notifications.class
         );
@@ -79,7 +79,7 @@ public class NotificationsService {
         return createNotification(userId, msg, "TRANSACTION_RECEIVED", "UNREAD", sentAt);
     }
 
-    // Category-related:
+    // Category-related
     public Notifications createCategoryCreatedNotification(Long userId, String categoryName, Date sentAt) {
         String msg = String.format("New category '%s' has been created", categoryName);
         return createNotification(userId, msg, "CATEGORY_CREATED", "UNREAD", sentAt);
