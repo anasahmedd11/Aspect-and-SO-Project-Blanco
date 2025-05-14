@@ -47,7 +47,7 @@ public class CategoriesService {
 
     public Categories updateCategory(Long id, CategoriesDTO categoryDTO) {
         ResponseEntity<Categories> response = restTemplate.exchange(
-                databaseServiceUrl + "/categories/" + id,
+                databaseServiceUrl + id,
                 HttpMethod.PUT,
                 new HttpEntity<>(categoryDTO),
                 Categories.class
@@ -56,7 +56,7 @@ public class CategoriesService {
     }
 
     public void deleteCategory(Long id) {
-        restTemplate.delete(databaseServiceUrl + "/categories/" + id);
+        restTemplate.delete(databaseServiceUrl+ id);
     }
 
 }
