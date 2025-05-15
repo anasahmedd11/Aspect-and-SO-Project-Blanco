@@ -82,7 +82,7 @@ public class ExpensesService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
         return expensesRepository.findByUserId(existingUser.getId());
     }
-/*
+
     public List<Expenses> getUserMonthlyExpenses(Long userId) {
         LocalDate firstDateOfMonth = LocalDate.now().withDayOfMonth(1);
         Date startDate = Date.from(firstDateOfMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -94,7 +94,7 @@ public class ExpensesService {
         LocalDate startOfWeek = now.with(DayOfWeek.SATURDAY);
         Date startDate = Date.from(startOfWeek.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return expensesRepository.getUserExpenses(startDate, userId);
-    }*/
+    }
 
     // get expenses by date
     public List<Expenses> getExpensesByDate(Long userId, Date date) {
@@ -102,8 +102,8 @@ public class ExpensesService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
         return expensesRepository.findByUserIdAndDate(existingUser.getId(), date);
     }
-/*
+
     public List<CategoryExpenseDTO> getTotalExpenseAmountByCategory(Long userId) {
         return expensesRepository.findTotalExpenseAmountByCategory(userId);
-    }*/
+    }
 }
