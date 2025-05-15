@@ -1,7 +1,6 @@
 package com.example.MoneyManagementService.service;
 
 import com.example.MoneyManagementService.DTO.TransactionDTO;
-import com.example.MoneyManagementService.entity.Categories;
 import com.example.MoneyManagementService.entity.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;

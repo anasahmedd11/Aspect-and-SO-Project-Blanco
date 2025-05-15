@@ -19,7 +19,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> authenticate(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
+    public ResponseEntity<Object> authenticate(@RequestBody LoginRequest loginRequest) {
         try {
             return ResponseEntity.ok(authService.loginUser(loginRequest));
         } catch (Exception e) {
