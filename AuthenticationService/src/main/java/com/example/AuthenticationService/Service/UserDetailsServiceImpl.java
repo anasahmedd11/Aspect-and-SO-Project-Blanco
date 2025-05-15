@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://Blanco_DatabaseService:8080/db-service/users/email/";
+    private final String databaseServiceUrl = "http://Blanco-Database-Service:8081/db-service/users/email/";
 
     @Autowired
     public UserDetailsServiceImpl(RestTemplate restTemplate) {

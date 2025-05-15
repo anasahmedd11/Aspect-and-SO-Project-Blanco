@@ -16,12 +16,12 @@ public interface ExpensesRepository extends JpaRepository<Expenses, Long> {
     List<Expenses> findByUserId(Long userId);
 
     List<Expenses> findByUserIdAndDate(Long userId, Date endDate);
-
+/*
     @Query("SELECT e FROM  Expenses e WHERE e.date >= :startDate and e.user.id == :userId")
     List<Expenses> getUserExpenses(@Param("startDate") Date startDate, @Param("userId") Long userId);
 
     //top query from Mohamed Khaled
     @Query("SELECT e.category.name , SUM(e.amount) FROM Expenses e WHERE e.user.id == :userId  GROUP BY e.category.name")
     List<CategoryExpenseDTO> findTotalExpenseAmountByCategory(@Param("userId") Long userId);
-
+*/
 }

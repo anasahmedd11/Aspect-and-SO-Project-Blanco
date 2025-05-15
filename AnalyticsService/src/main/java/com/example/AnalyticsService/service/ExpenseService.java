@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class ExpenseService {
 
-    private final String baseurl = "http://Blanco_DatabaseService:8080/db-service/expenses";
+    private final String baseurl = "http://Blanco-Database-Service:8081/db-service/expenses";
     private final RestTemplate restTemplate;
 
     @Autowired

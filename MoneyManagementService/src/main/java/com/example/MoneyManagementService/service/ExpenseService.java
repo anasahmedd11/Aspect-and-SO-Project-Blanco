@@ -16,7 +16,7 @@ import java.util.Date;
 @Service
 public class ExpenseService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://Blanco_DatabaseService:8080/db-service/expenses";
+    private final String databaseServiceUrl = "http://Blanco-Database-Service:8081/db-service/expenses";
 
     @Autowired
     public ExpenseService(RestTemplate restTemplate) {

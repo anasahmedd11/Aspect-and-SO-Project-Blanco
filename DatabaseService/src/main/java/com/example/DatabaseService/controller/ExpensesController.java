@@ -40,12 +40,12 @@ public class ExpensesController {
         }
         return ResponseEntity.notFound().build();
     }
-
+/*
     @GetMapping("/user/{id}/expenses-by-category")
     public List<CategoryExpenseDTO> getExpensesByCategory(@PathVariable Long userId) {
         return expensesService.getTotalExpenseAmountByCategory(userId);
-    }
-
+    }*/
+/*
     //Generate Monthly Report
     @GetMapping("/user/{id}/monthly-report")
     public List<Expenses> getMonthlyReport(@PathVariable Long id) {
@@ -57,7 +57,7 @@ public class ExpensesController {
     public List<Expenses> getWeeklyReport(@PathVariable Long id) {
         return expensesService.getUserWeeklyExpenses(id);
     }
-
+*/
     @PostMapping
     public ResponseEntity<Expenses> createExpense(@Valid @RequestBody CreateExpenseDTO createExpenseDTO) {
         Expenses createdExpense = expensesService.createExpense(createExpenseDTO);

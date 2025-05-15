@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class TransactionService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceTransactionUrl = "http://Blanco_DatabaseService:8080/db-service/transaction";
+    private final String databaseServiceTransactionUrl = "http://Blanco-Database-Service:8081/db-service/transaction";
 
     @Autowired
     public TransactionService(RestTemplate restTemplate) {
