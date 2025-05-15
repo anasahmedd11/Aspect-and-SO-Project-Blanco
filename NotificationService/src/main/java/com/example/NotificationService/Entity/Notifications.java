@@ -8,7 +8,6 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class Notifications {
 
     private Long id;

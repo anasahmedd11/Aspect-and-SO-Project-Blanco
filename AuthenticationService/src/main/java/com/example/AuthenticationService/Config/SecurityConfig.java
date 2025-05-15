@@ -1,5 +1,8 @@
 package com.example.AuthenticationService.Config;
 
+import com.example.AuthenticationService.Security.AuthEntryPointJWT;
+import com.example.AuthenticationService.Service.UserDetailsServiceImpl;
+import com.example.AuthenticationService.Security.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +27,7 @@ public class SecurityConfig {
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    private AuthEntryPointJWT unauthorizedHandler;
 
     @Autowired
     private AuthTokenFilter authTokenFilter;

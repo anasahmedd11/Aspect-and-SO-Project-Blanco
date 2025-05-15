@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class NotificationsService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://localhost:8080/db-service/notifications";
+    private final String databaseServiceUrl = "http://Blanco_DatabaseService:8080/db-service/notifications";
 
     @Autowired
     public NotificationsService(RestTemplate restTemplate) {

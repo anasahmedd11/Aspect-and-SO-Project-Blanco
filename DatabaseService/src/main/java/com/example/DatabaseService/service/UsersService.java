@@ -25,6 +25,10 @@ public class UsersService {
         return usersRepository.findById(id);
     }
 
+    public Optional<Users> getUserByEmail(String email) {
+        return usersRepository.getUsersByEmail(email);
+    }
+
     public Users createUser(createUserDTO createUserDTO){
         Users user = new Users(
                 createUserDTO.getEmail(),

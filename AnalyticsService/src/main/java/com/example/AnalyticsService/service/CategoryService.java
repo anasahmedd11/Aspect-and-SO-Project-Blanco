@@ -13,7 +13,7 @@ import java.util.List;
 public class CategoryService {
 
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://localhost:8080/db-service/categories";
+    private final String databaseServiceUrl = "http://Blanco_DatabaseService:8080/db-service/categories";
 
     @Autowired
     public CategoryService(RestTemplate restTemplate) {

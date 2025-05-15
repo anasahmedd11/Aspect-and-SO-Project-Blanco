@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class CategoriesService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://localhost:8080/db-service/categories";
+    private final String databaseServiceUrl = "http://Blanco_DatabaseService:8080/db-service/categories";
 
     @Autowired
     public CategoriesService(RestTemplate restTemplate) {
@@ -32,7 +32,7 @@ public class CategoriesService {
 
     public Categories getCategoryById(Long id) {
         return restTemplate.getForObject(
-                databaseServiceUrl + id,
+                databaseServiceUrl + "/" + id,
                 Categories.class
         );
     }
@@ -47,7 +47,7 @@ public class CategoriesService {
 
     public Categories updateCategory(Long id, CategoriesDTO categoryDTO) {
         ResponseEntity<Categories> response = restTemplate.exchange(
-                databaseServiceUrl + id,
+                databaseServiceUrl + "/" + id,
                 HttpMethod.PUT,
                 new HttpEntity<>(categoryDTO),
                 Categories.class
@@ -56,7 +56,7 @@ public class CategoriesService {
     }
 
     public void deleteCategory(Long id) {
-        restTemplate.delete(databaseServiceUrl+ id);
+        restTemplate.delete(databaseServiceUrl + "/" + id);
     }
 
 }

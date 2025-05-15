@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class BudgetService {
 
-    String baseurl = "http://localhost:8080/db-service/budgets";
+    String baseurl = "http://Blanco_DatabaseService:8080/db-service/budgets";
 
     private final RestTemplate restTemplate;
 

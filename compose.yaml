@@ -19,9 +19,10 @@ services:
       timeout: 20s
       retries: 10
 
-  Blanco-db-service:
+
+  Blanco-database-service:
     image: blanco-db-service
-    container_name: Blanco_db
+    container_name: Blanco_DatabaseService
     build:
       context: DatabaseService
       dockerfile: Dockerfile
@@ -34,6 +35,21 @@ services:
     networks:
       - service-communication
 
+
+  Blanco-authentication-service:
+    image: blanco-authentication-service
+    container_name: Blanco_AuthenticationService
+    build:
+      context: AuthenticationService
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      - Blanco-database-service
+    networks:
+      - service-communication
+
+
   Blanco-MoneyManagementService:
     image: blanco-money-management-service
     container_name: Blanco_MoneyManagementService
@@ -41,13 +57,40 @@ services:
       context: MoneyManagementService
       dockerfile: Dockerfile
     ports:
-      - "8082:8080"
+      - "8083:8080"
     depends_on:
-      Blanco-mysql:
-        condition: service_healthy
-        restart: true
+      - Blanco-database-service
     networks:
       - service-communication
+
+
+  Blanco-AnalyticsService:
+    image: blanco-analytics-service
+    container_name: Blanco_AnalyticsService
+    build:
+      context: AnalyticsService
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8080"
+    depends_on:
+      - Blanco-database-service
+    networks:
+      - service-communication
+
+
+  Blanco-NotificationService:
+    image: blanco-notification-service
+    container_name: Blanco_NotificationService
+    build:
+      context: NotificationService
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"
+    depends_on:
+      - Blanco-database-service
+    networks:
+      - service-communication
+
 
 networks:
   service-communication:

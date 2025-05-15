@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class BudgetService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceUrl = "http://localhost:8080/db-service/budgets";
+    private final String databaseServiceUrl = "http://Blanco_DatabaseService:8080/db-service/budgets";
 
     @Autowired
     public BudgetService(RestTemplate restTemplate) {

@@ -1,4 +1,4 @@
-package com.example.AuthenticationService.security;
+package com.example.AuthenticationService.Security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

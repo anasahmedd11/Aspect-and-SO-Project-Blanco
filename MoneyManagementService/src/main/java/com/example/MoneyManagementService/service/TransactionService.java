@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class TransactionService {
     private final RestTemplate restTemplate;
-    private final String databaseServiceTransactionUrl = "http://localhost:8080/db-service/transaction";
+    private final String databaseServiceTransactionUrl = "http://Blanco_DatabaseService:8080/db-service/transaction";
 
     @Autowired
     public TransactionService(RestTemplate restTemplate) {
@@ -39,7 +39,7 @@ public class TransactionService {
 
     public Transactions updateTransaction(Long id, TransactionDTO transactionDTO) {
         ResponseEntity<Transactions> response = restTemplate.exchange(
-                databaseServiceTransactionUrl + id,
+                databaseServiceTransactionUrl + "/" + id,
                 HttpMethod.PUT,
                 new HttpEntity<>(transactionDTO),
                 Transactions.class

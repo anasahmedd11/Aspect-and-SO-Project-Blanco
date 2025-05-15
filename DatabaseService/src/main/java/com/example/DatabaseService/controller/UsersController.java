@@ -34,6 +34,15 @@ public class UsersController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Users> getUserByEmail(@PathVariable String email) {
+        Optional<Users> user = usersService.getUserByEmail(email);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
     public ResponseEntity<Users> createUser(@Valid @RequestBody createUserDTO createUserDTO) {
         Users newUser = usersService.createUser(createUserDTO);
