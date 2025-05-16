@@ -1,6 +1,8 @@
 package com.example.APIManagerService.controller;
 import com.example.APIManagerService.entity.Budgets;
+import com.example.APIManagerService.entity.Categories;
 import com.example.APIManagerService.service.BudgetService;
+import com.example.APIManagerService.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,17 +15,21 @@ public class BudgetController {
 
 
     private final BudgetService budgetService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public BudgetController(BudgetService budgetService) {
+    public BudgetController(BudgetService budgetService, CategoryService categoryService) {
         this.budgetService = budgetService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/user/{userId}")
     public String getAllUserBudgets(@PathVariable Long userId, Model model) {
 
         List<Budgets> budgets = budgetService.getAllUserBudgets(userId);
+        List<Categories> categories = categoryService.getAllCategories();
         model.addAttribute("budgets", budgets);
+        model.addAttribute("categories", categories);
         model.addAttribute("newBudget", new Budgets());
         model.addAttribute("userId", userId);
         return "budgets";
