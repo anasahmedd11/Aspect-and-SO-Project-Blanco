@@ -19,6 +19,15 @@ services:
       timeout: 20s
       retries: 10
 
+  Blanco-Redis:
+    image: redis:latest
+    container_name: Blanco-Redis
+    ports:
+      - "6379:6379"
+    networks:
+      - service-communication
+    restart: unless-stopped
+
 
   Blanco-database-service:
     image: blanco-db-service
@@ -106,6 +115,7 @@ services:
       - Blanco-MoneyManagementService
       - Blanco-NotificationService
       - Blanco-AnalyticsService
+      - Blanco-Redis
     networks:
       - service-communication
 
