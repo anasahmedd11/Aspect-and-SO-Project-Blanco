@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class CategoriesController {
         if (category != null) {
             return ResponseEntity.ok(category);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok((Categories) Collections.emptyList());
     }
 
     @PostMapping
@@ -44,7 +45,7 @@ public class CategoriesController {
         if (updatedCategory != null) {
             return ResponseEntity.ok(updatedCategory);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok((Categories) Collections.emptyList());
     }
 
     @DeleteMapping("/{id}")
