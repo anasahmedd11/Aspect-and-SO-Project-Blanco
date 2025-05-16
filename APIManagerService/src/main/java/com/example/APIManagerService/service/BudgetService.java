@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class BudgetService {
 
-    private String baseUrl = "http://Blanco-Money-Management-Service:8083/money-management/budgets";
+    private final String baseUrl = "http://Blanco-Money-Management-Service:8083/money-management/budgets";
     private final RestTemplate restTemplate;
 
     @Autowired
@@ -25,6 +25,28 @@ public class BudgetService {
         Budgets[] budgets = restTemplate.getForObject(url, Budgets[].class);
         return List.of(budgets);
     }
+
+    public Budgets getBudgetById(Long id) {
+        String url = baseUrl + "/" + id;
+        return restTemplate.getForObject(url, Budgets.class);
+    }
+
+    public void createBudget(Budgets budget) {
+        String url = baseUrl;
+        restTemplate.postForObject(url, budget, Budgets.class);
+    }
+
+    public void updateBudget(Long id, Budgets budget) {
+        String url = baseUrl + "/" + id;
+        restTemplate.put(url, budget);
+    }
+
+    public void deleteBudget(Long id) {
+        String url = baseUrl + "/" + id;
+        restTemplate.delete(url);
+    }
+
+
 
 
 
