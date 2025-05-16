@@ -26,16 +26,13 @@ public class ExpenseController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Expenses>> getAllUserExpenses(@PathVariable Long userId) {
         List<Expenses> expenses = expenseService.getAllUserExpenses(userId);
-        if (expenses.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(expenses);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Expenses> getExpenseById(@PathVariable Long id) {
         Optional<Expenses> expense = expenseService.getExpenseById(id);
-        return expense.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return expense.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
     }
 
     @PostMapping
@@ -50,32 +47,24 @@ public class ExpenseController {
         if (updatedExpense != null) {
             return ResponseEntity.ok(updatedExpense);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
-        if (expenseService.deleteExpense(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        expenseService.deleteExpense(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/user/{userId}/category/{categoryId}")
     public ResponseEntity<List<Expenses>> getExpensesByCategory(@PathVariable Long userId, @PathVariable Long categoryId) {
         List<Expenses> expenses = expenseService.getExpensesByCategory(userId, categoryId);
-        if (expenses.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(expenses);
     }
 
     @GetMapping("/user/{userId}/date/{date}")
     public ResponseEntity<List<Expenses>> getExpensesByDate(@PathVariable Long userId, @PathVariable Date date) {
         List<Expenses> expenses = expenseService.getExpensesByDate(userId, date);
-        if (expenses.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(expenses);
     }
 
