@@ -78,7 +78,33 @@
                     </div>
                     <div class="card-body">
                         <div class="chart-container">
+                            <script
+                                    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+                            </script>
+                            <canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+                            <script th:inline="javascript">
+                                let xValues = /*[[${categories}]]*/ [];
+                                let yValues = /*[[${barAmounts}]]*/ [];
 
+                                const barColors = ["red", "green", "blue", "orange", "brown"];
+
+                                new Chart("myChart2", {
+                                    type: "bar",
+                                    data: {
+                                        labels: xValues,
+                                        datasets: [{
+                                            backgroundColor: barColors,
+                                            data: yValues
+                                        }]
+                                    },
+                                    options: {
+                                        legend: {display: false},
+                                        title: {
+                                            display: false,
+                                        }
+                                    }
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -99,32 +125,34 @@
 
                             <script th:inline="javascript">
                                 let monthlyExpenses = /*[[${monthlyExpenses}]]*/ [];
-                                let yValues = [];
-                                for (let i = 1; i <= 30; i++) {
-                                    yValues.push(i);
-                                }
+                                let monthlyDates = /*[[${dates}]]*/ [];
+
+                                const xAxis = monthlyDates.map(date => date.substring(3, 10));
+                                const yAxis = monthlyExpenses.map(expense => expense);
 
                                 new Chart("myChart", {
                                     type: "line",
                                     data: {
-                                        labels: monthlyExpenses,
+                                        labels: xAxis,
                                         datasets: [{
+                                            label: "Monthly Expenses",
                                             fill: false,
-                                            lineTension: 0,
+                                            lineTension: 0.1,
                                             backgroundColor: "rgba(0,0,255,1.0)",
                                             borderColor: "rgba(0,0,255,0.1)",
-                                            data: yValues
+                                            data: yAxis
                                         }]
                                     },
                                     options: {
                                         legend: {display: false},
                                         scales: {
-                                            yAxes: [{ticks: {min: 6, max: 16}}],
+                                            y: {
+                                                beginAtZero: true
+                                            }
                                         }
                                     }
                                 });
                             </script>
-
                         </div>
                     </div>
                 </div>

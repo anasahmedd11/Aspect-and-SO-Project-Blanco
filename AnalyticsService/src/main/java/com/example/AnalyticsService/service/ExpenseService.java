@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ExpenseService {
@@ -43,16 +41,22 @@ public class ExpenseService {
         }
     }
 
-    public List<Expenses> getUserMonthlyExpenses(Long userId) {
-        String url = baseurl + "/monthly-report/user/" + userId;
+    public Map<String, List<?>> getUserExpensesOverPeriod(Long userId, String period) {
+        String url = baseurl + "/" + period + "-report/user/" + userId;
         ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
-        return Arrays.asList(response.getBody());
+        List<String> dates = new ArrayList<>();
+        List<Double> amounts = new ArrayList<>();
+        if (response.getBody() != null) {
+            for (Expenses expense : response.getBody()) {
+                dates.add(expense.getDate().toString());
+                amounts.add(expense.getAmount());
+            }
+        }
+        Map<String, List<?>> result = new HashMap<>();
+        result.put("dates", dates);
+        result.put("amounts", amounts);
+        return result;
     }
 
-    public List<Expenses> getUserWeeklyExpenses(Long userId) {
-        String url = baseurl + "/weekly-report/user/" + userId;
-        ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
-        return Arrays.asList(response.getBody());
-    }
 
 }

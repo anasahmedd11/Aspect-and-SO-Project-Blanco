@@ -17,8 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.example.DatabaseService.service.NullPropertyNameHelper.getNullPropertyNames;
 
@@ -106,4 +105,6 @@ public class ExpensesService {
     public List<CategoryExpenseDTO> getTotalExpenseAmountByCategory(Long userId) {
         return expensesRepository.findTotalExpenseAmountByCategory(userId);
     }
+
+
 }

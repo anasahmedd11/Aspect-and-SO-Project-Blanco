@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,13 +34,13 @@ public class ExpenseController {
     }
 
     @GetMapping("/monthly-report/user/{id}")
-    public List<Expenses> getMonthlyReport(@PathVariable Long id) {
-        return expenseService.getUserMonthlyExpenses(id);
+    public Map<String, List<?>> getMonthlyReport(@PathVariable Long id) {
+        return expenseService.getUserExpensesOverPeriod(id, "monthly");
     }
 
     @GetMapping("/weekly-report/user/{id}")
-    public List<Expenses> getWeeklyReport(@PathVariable Long id) {
-        return expenseService.getUserWeeklyExpenses(id);
+    public Map<String, List<?>> getWeeklyReport(@PathVariable Long id) {
+        return expenseService.getUserExpensesOverPeriod(id, "weekly");
     }
 
 

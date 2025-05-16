@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExpenseService {
@@ -23,16 +24,16 @@ public class ExpenseService {
         this.restTemplate = restTemplate;
     }
 
-    public List<Expenses> getMonthlyExpenseReport(Long id) {
+    public Map<String, List<?>> getMonthlyExpenseReport(Long id) {
         String url = analyticsService + "/monthly-report/user/" + id;
-        ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
-        return Arrays.asList(response.getBody());
+        ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+        return response.getBody();
     }
 
-    public List<Expenses> getWeeklyExpenseReport(Long id) {
+    public Map<String, List<?>> getWeeklyExpenseReport(Long id) {
         String url = analyticsService + "/weekly-report/user/" + id;
-        ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
-        return Arrays.asList(response.getBody());
+        ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+        return response.getBody();
     }
 
     public List<Expenses> getAllExpenses(Long userId) {

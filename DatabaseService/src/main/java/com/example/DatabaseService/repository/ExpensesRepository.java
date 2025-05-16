@@ -1,6 +1,7 @@
 package com.example.DatabaseService.repository;
 
 import com.example.DatabaseService.DTO.CategoryExpenseDTO;
+import com.example.DatabaseService.DTO.CreateExpenseDTO;
 import com.example.DatabaseService.entity.Expenses;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -21,7 +22,8 @@ public interface ExpensesRepository extends JpaRepository<Expenses, Long> {
     List<Expenses> getUserExpenses(@Param("startDate") Date startDate, @Param("userId") Long userId);
 
     //top query from Mohamed Khaled
-    @Query("SELECT e.category.name , SUM(e.amount) FROM Expenses e WHERE e.user.id = :userId  GROUP BY e.category.name")
+    @Query("SELECT new com.example.DatabaseService.DTO.CategoryExpenseDTO(e.category.name, SUM(e.amount)) FROM Expenses e WHERE e.user.id = :userId GROUP BY e.category.name")
     List<CategoryExpenseDTO> findTotalExpenseAmountByCategory(@Param("userId") Long userId);
+
 
 }
