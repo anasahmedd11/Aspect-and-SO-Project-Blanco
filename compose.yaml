@@ -100,6 +100,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - Blanco-database-service
+      - Blanco-authentication-service
+      - Blanco-MoneyManagementService
+      - Blanco-NotificationService
+      - Blanco-AnalyticsService
     networks:
       - service-communication
 
