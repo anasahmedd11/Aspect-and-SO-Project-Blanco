@@ -32,12 +32,12 @@ public class ExpenseController {
         return expenseService.getExpenseById(id);
     }
 
-    @GetMapping("/user/{id}/monthly-report")
+    @GetMapping("/monthly-report/user/{id}")
     public List<Expenses> getMonthlyReport(@PathVariable Long id) {
         return expenseService.getUserMonthlyExpenses(id);
     }
 
-    @GetMapping("/user/{id}/weekly-report")
+    @GetMapping("/weekly-report/user/{id}")
     public List<Expenses> getWeeklyReport(@PathVariable Long id) {
         return expenseService.getUserWeeklyExpenses(id);
     }

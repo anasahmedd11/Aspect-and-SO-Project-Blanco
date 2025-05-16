@@ -12,8 +12,8 @@
 
             fetch('/categories', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name })
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name})
             })
                 .then(response => {
                     if (response.ok) {
@@ -40,8 +40,8 @@
 
             fetch(`/categories/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name })
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name})
             })
                 .then(response => {
                     if (response.ok) {
@@ -69,62 +69,36 @@
 
     </script>
     <style>
-        .navbar {
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .navbar-brand {
-            font-weight: bold;
-            color: #0d6efd;
-        }
-        .nav-link {
-            color: #495057;
-        }
-        .nav-link:hover {
-            color: #0d6efd;
-        }
-        .nav-link.active {
-            color: #0d6efd;
-            font-weight: 500;
-        }
+
         body {
             background-color: #f8f9fa;
         }
+
         .categories-container {
             padding: 20px;
         }
+
         .card {
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
-        .card-header {
-            background-color: white;
-            border-bottom: 1px solid #eee;
-            padding: 15px 20px;
-        }
+
         .category-card {
             transition: transform 0.2s;
         }
+
         .category-card:hover {
             transform: translateY(-2px);
         }
-        .category-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
+
         .footer {
             background-color: white;
             padding: 20px 0;
             margin-top: auto;
-            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .footer-text {
             color: #6c757d;
             margin: 0;
@@ -133,69 +107,9 @@
 </head>
 <body>
 <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">Blanco</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-chart-line"></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-wallet"></i> Expenses
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-piggy-bank"></i> Budgets
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/money-management/transactions">
-                        <i class="fas fa-exchange-alt"></i> Transactions
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-chart-bar"></i> Reports
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">
-                        <i class="fas fa-th"></i> Categories
-                    </a>
-                </li>
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge bg-danger rounded-pill">0</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-user"></i> Profile
-                    </a>
-                </li>
+<!-- Include the header -->
+<div th:replace="~{fragments/header :: header}"></div>
 
-                <li class="nav-item">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Logout <i class="fas fa-arrow-right"></i>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
 <div class="categories-container">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
