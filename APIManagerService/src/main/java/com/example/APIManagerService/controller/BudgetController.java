@@ -26,6 +26,7 @@ public class BudgetController {
 
         List<Budgets> budgets = budgetService.getAllUserBudgets(userId);
         model.addAttribute("budgets", budgets);
+        model.addAttribute("newBudget", new Budgets());
         return "budgets";
     }
 
