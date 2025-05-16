@@ -1,4 +1,54 @@
 package com.example.APIManagerService.service;
 
+import com.example.APIManagerService.entity.Expenses;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
+
+@Service
 public class ExpenseService {
+
+    private final RestTemplate restTemplate;
+    private final String moneyManagementServiceUrl = "http://Blanco-Money-Management-Service:8083/money-management/expenses";
+
+    @Autowired
+    public ExpenseService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    public List<Expenses> getAllExpenses(Long userId) {
+        String url = moneyManagementServiceUrl + "/user/" + userId;
+        ResponseEntity<List<Expenses>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<Expenses>>() {}
+        );
+        return response.getBody();
+    }
+
+    public Expenses getExpenseById(Long id) {
+        String url = moneyManagementServiceUrl + "/" + id;
+        return restTemplate.getForObject(url, Expenses.class);
+    }
+
+    public void createExpense(Expenses expense) {
+        String url = moneyManagementServiceUrl;
+        restTemplate.postForObject(url, expense, Expenses.class);
+    }
+
+    public void updateExpense(Long id, Expenses expense) {
+        String url = moneyManagementServiceUrl + "/" + id;
+        restTemplate.put(url, expense);
+    }
+
+    public void deleteExpense(Long id) {
+        String url = moneyManagementServiceUrl + "/" + id;
+        restTemplate.delete(url);
+    }
 }
