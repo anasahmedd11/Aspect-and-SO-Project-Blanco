@@ -28,9 +28,9 @@ public class AuthenticationService {
         );
     }
 
-    public ResponseEntity<LoginResponseDTO> login(LoginRequestDTO loginRequestDTO) {
+    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
         String url = AuthenticationServiceUrl + "/login";
-        return restTemplate.postForEntity(
+        return restTemplate.postForObject(
                 url,
                 loginRequestDTO,
                 LoginResponseDTO.class

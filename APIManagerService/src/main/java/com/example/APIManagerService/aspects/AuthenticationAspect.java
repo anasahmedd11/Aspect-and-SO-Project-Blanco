@@ -31,10 +31,9 @@ public class AuthenticationAspect {
     @Pointcut("execution(* com.example.APIManagerService.controller.RegisterController..*(..))")
     public void registerControllerMethods() {}
 
-    //@Before("allControllerMethods() && ! loginControllerMethods() && ! registerControllerMethods()")
+    @Before("allControllerMethods() && ! loginControllerMethods() && ! registerControllerMethods()")
     public void checkAuthentication() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-
         if (request.getCookies() == null) {
             throw new UnauthorizedException("User must be logged in to access this resource.");
         }

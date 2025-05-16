@@ -6,7 +6,6 @@ import com.example.APIManagerService.service.AuthenticationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,15 +30,15 @@ public class LoginController {
     public String loginForm(Model model, LoginRequestDTO user,
                             RedirectAttributes redirectAttributes, HttpServletResponse response) {
         try {
-            ResponseEntity<LoginResponseDTO> loginResponse = authenticationService.login(user);
-            redirectAttributes.addFlashAttribute("message", "Logged in successfully!");
+            LoginResponseDTO loginResponse = authenticationService.login(user);
 
-            Cookie cookie = new Cookie("blanco-jwt", loginResponse.getBody().getToken());
+            Cookie cookie = new Cookie("blanco-jwt", loginResponse.getToken());
             cookie.setPath("/");
             cookie.setMaxAge(60 * 60 * 24);
             response.addCookie(cookie);
 
-            return "redirect:/home";
+            redirectAttributes.addFlashAttribute("message", "Logged in successfully!");
+            return "redirect:/home/" + loginResponse.getId();
         }
         catch (HttpClientErrorException e) {
             redirectAttributes.addFlashAttribute("message", "Login failed! Please try again.");

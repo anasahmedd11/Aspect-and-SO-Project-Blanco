@@ -18,9 +18,9 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
         try {
-            return ResponseEntity.ok(authService.loginUser(loginRequest));
+            return authService.loginUser(loginRequest);
         } catch (Exception e) {
             return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
         }
