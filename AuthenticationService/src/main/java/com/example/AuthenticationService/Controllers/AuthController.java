@@ -7,8 +7,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -33,10 +31,9 @@ public class AuthController {
         return authService.registerUser(registerRequest);
     }
 
-    @GetMapping("/authenticated")
+    @GetMapping("/is-authenticated")
     @PreAuthorize("isAuthenticated()")
-    public String getEmail() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return "User with email " + authentication.getName() + " is authenticated";
+    public ResponseEntity<Boolean> checkAuthentication() {
+        return ResponseEntity.ok(true);
     }
 }
