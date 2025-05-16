@@ -59,7 +59,7 @@ public class UsersController {
             Users updatedUser = usersService.updateUser(id, updateUserDTO);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         }catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -69,7 +69,7 @@ public class UsersController {
             usersService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 }
