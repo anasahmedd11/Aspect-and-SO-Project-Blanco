@@ -16,7 +16,7 @@ import java.util.Objects;
 public class CategoryService {
 
     private final RestTemplate restTemplate;
-    private String MoneyManagURL = "http://localhost:8083/money-management/categories";
+    private String MoneyManagURL = "http://Blanco-Money-Management-Service:8083/money-management/categories";
 
     @Autowired
     public CategoryService(RestTemplate restTemplate) {
@@ -24,8 +24,8 @@ public class CategoryService {
     }
 
     public List<Categories> getAllCategories() {
-        ResponseEntity<Categories[]> response = restTemplate.getForEntity(MoneyManagURL, Categories[].class);
-        return Arrays.asList(Objects.requireNonNull(response.getBody()));
+        Categories[] response = restTemplate.getForObject(MoneyManagURL, Categories[].class);
+        return Arrays.asList(response);
     }
 
     public Categories getCategoryById(Long id) {
