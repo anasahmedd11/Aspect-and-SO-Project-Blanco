@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class BudgetsController {
     public ResponseEntity<Budgets> getBudgetById(@PathVariable Long id) {
         Optional<Budgets> budget = budgetService.getBudgetById(id);
         return budget.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.ok((Budgets) Collections.emptyList()));
     }
 
     @PostMapping
@@ -45,7 +46,7 @@ public class BudgetsController {
     public ResponseEntity<List<Budgets>> updateBudget(@PathVariable Long id, @RequestBody BudgetDTO budgetDTO) {
         List<Budgets> updatedBudgets = budgetService.updateBudget(id, budgetDTO);
         if (updatedBudgets.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(updatedBudgets, HttpStatus.OK);
     }
@@ -53,10 +54,6 @@ public class BudgetsController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBudget(@PathVariable Long id) {
         boolean deleted = budgetService.deleteBudget(id);
-        if (deleted) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
