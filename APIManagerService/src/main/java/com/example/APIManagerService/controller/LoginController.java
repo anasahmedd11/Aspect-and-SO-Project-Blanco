@@ -3,6 +3,8 @@ package com.example.APIManagerService.controller;
 import com.example.APIManagerService.DTO.Authentication.LoginRequestDTO;
 import com.example.APIManagerService.DTO.Authentication.LoginResponseDTO;
 import com.example.APIManagerService.service.AuthenticationService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,10 +28,17 @@ public class LoginController {
 
     @RequestMapping(value = "/Authentication/loginForm", method = RequestMethod.POST)
     @PostMapping("/Authentication/loginForm")
-    public String loginForm(Model model, LoginRequestDTO user, RedirectAttributes redirectAttributes) {
+    public String loginForm(Model model, LoginRequestDTO user,
+                            RedirectAttributes redirectAttributes, HttpServletResponse response) {
         try {
-            ResponseEntity<LoginResponseDTO> response = authenticationService.login(user);
+            ResponseEntity<LoginResponseDTO> loginResponse = authenticationService.login(user);
             redirectAttributes.addFlashAttribute("message", "Logged in successfully!");
+
+            Cookie cookie = new Cookie("blanco-jwt", loginResponse.getBody().getToken());
+            cookie.setPath("/");
+            cookie.setMaxAge(60 * 60 * 24);
+            response.addCookie(cookie);
+
             return "redirect:/home";
         }
         catch (HttpClientErrorException e) {
