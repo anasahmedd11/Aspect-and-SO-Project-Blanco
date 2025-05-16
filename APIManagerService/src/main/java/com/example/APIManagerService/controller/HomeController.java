@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class HomeController {
         this.expenseService = expenseService;
     }
 
-    @GetMapping("/home")
-    public String home(Long userId, Model model) {
+    @GetMapping("/home/{userId}")
+    public String getHomePage(@PathVariable Long userId, Model model) {
         List<Transactions> transactions = transactionService.getAllTransactions(userId);
         List<Budgets> budgets = budgetService.getAllUserBudgets(userId);
         List<Expenses> expenses = expenseService.getAllExpenses(userId);
