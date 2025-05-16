@@ -1,8 +1,8 @@
 package com.example.AuthenticationService.Config;
 
 import com.example.AuthenticationService.Security.AuthEntryPointJWT;
-import com.example.AuthenticationService.Service.UserDetailsServiceImpl;
 import com.example.AuthenticationService.Security.AuthTokenFilter;
+import com.example.AuthenticationService.Service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+@EnableMethodSecurity // Enables @PreAuthorize, @PostAuthorize etc.
 public class SecurityConfig {
 
     @Autowired
@@ -56,8 +56,7 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/AuthenticationService/auth/**").permitAll()
-                                .requestMatchers("/AuthenticationService/test/**").permitAll()
+                        auth.requestMatchers("/Authentication/**").permitAll()
                                 .anyRequest().authenticated()
                 );
 

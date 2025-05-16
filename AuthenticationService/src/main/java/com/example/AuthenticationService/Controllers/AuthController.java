@@ -1,8 +1,9 @@
 package com.example.AuthenticationService.Controllers;
 
 import com.example.AuthenticationService.DTO.LoginRequest;
+import com.example.AuthenticationService.DTO.RegisterRequest;
 import com.example.AuthenticationService.Service.AuthService;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,12 +20,17 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> authenticate(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<Object> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
         try {
             return ResponseEntity.ok(authService.loginUser(loginRequest));
         } catch (Exception e) {
             return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
         }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
+        return authService.registerUser(registerRequest);
     }
 
     @GetMapping("/authenticated")

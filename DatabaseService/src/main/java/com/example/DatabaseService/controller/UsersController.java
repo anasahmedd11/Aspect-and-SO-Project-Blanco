@@ -45,8 +45,12 @@ public class UsersController {
 
     @PostMapping
     public ResponseEntity<Users> createUser(@Valid @RequestBody createUserDTO createUserDTO) {
-        Users newUser = usersService.createUser(createUserDTO);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        try {
+            Users newUser = usersService.createUser(createUserDTO);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
     }
 
     @PutMapping("/{id}")

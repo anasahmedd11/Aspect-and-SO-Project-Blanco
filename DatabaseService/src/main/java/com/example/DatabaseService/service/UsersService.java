@@ -30,6 +30,10 @@ public class UsersService {
     }
 
     public Users createUser(createUserDTO createUserDTO){
+        if (usersRepository.existsByEmail(createUserDTO.getEmail()))  {
+            throw new RuntimeException("User already exists with email: " + createUserDTO.getEmail());
+        }
+
         Users user = new Users(
                 createUserDTO.getEmail(),
                 createUserDTO.getPassword(),
