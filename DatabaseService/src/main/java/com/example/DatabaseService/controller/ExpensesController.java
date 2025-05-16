@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class ExpensesController {
         if (expense != null) {
             return ResponseEntity.ok(expense);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/user/{userId}/expenses-by-category")
@@ -72,7 +73,7 @@ public class ExpensesController {
         if (updatedExpense != null) {
             return ResponseEntity.ok(updatedExpense);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
@@ -87,7 +88,7 @@ public class ExpensesController {
         if (expenses != null && !expenses.isEmpty()) {
             return ResponseEntity.ok(expenses);
         }
-        return ResponseEntity.notFound().build();
+       return new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK);
     }
 
     // get expenses by date
@@ -97,7 +98,7 @@ public class ExpensesController {
         if (expenses != null && !expenses.isEmpty()) {
             return ResponseEntity.ok(expenses);
         }
-        return ResponseEntity.notFound().build();
+        return new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK);
     }
 
 }

@@ -34,7 +34,7 @@ public class BudgetsController {
             Budgets user = budgetOptional.get();
             return ResponseEntity.ok(user);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
     }
 
