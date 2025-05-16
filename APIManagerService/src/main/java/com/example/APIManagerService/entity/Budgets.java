@@ -15,15 +15,17 @@ public class Budgets {
 
     private Long id;
     private Long userId;
-    private double amount;
-    private Date startDate;
-    private Date endDate;
+    private double currentAmount;
+    private double limitAmount;
+    private Date createdAt;
+    private Date expiresAt;
     private Long categoryId;
 
-    public Budgets(double amount, Date startDate, Date endDate, Long userId, Long categoryId) {
-        this.amount = amount;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public Budgets(double currentAmount, double limitAmount, Date createdAt, Date expiresAt, Long userId, Long categoryId) {
+        this.currentAmount = currentAmount;
+        this.limitAmount = limitAmount;
+        this.createdAt = createdAt;
+        this.expiresAt = expiresAt;
         this.userId = userId;
         this.categoryId = categoryId;
     }
