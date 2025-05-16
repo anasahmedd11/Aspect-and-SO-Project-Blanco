@@ -92,6 +92,18 @@ services:
       - service-communication
 
 
+  Blanco-APIManagerService:
+    image: blanco-api-manager-service
+    container_name: Blanco-API-Manager-Service
+    build:
+      context: APIManagerService
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - service-communication
+
+
 networks:
   service-communication:
 
