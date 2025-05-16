@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class TransactionService {
     private final RestTemplate restTemplate;
-    private final String moneyManagementServiceUrl = "http://Blanco-Money-Management-Service:8083/money-management/transactions";
+    private final String moneyManagementServiceUrl = "http://Blanco-Money-Management-Service:8083/money-management/transaction";
 
     @Autowired
     public TransactionService(RestTemplate restTemplate) {
