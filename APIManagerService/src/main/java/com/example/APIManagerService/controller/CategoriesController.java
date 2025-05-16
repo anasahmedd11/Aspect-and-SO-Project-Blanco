@@ -24,9 +24,9 @@ public class CategoriesController {
 
     @GetMapping
     public String viewCategories(Model model) {
-     //   List<Categories> categories = categoryService.getAllCategories();
-       // model.addAttribute("categories", categories);
-        return "categories";  // Thymeleaf page name
+        List<Categories> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
+        return "categories";
     }
 
     @GetMapping("/{id}")
