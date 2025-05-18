@@ -23,7 +23,7 @@ public class TransactionController {
         model.addAttribute("transactions", transactionService.getAllTransactions(userId));
         model.addAttribute("newTransaction", new Transactions());
         model.addAttribute("userId", userId);
-        return "transactions";
+        return "transaction";
     }
 
     @PostMapping("/create")
@@ -36,7 +36,7 @@ public class TransactionController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to create transaction: " + e.getMessage());
         }
-        return "redirect:/transactions";
+        return "redirect:/transaction";
     }
 
     @PostMapping("/update/{id}")
@@ -50,7 +50,7 @@ public class TransactionController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to update transaction: " + e.getMessage());
         }
-        return "redirect:/transactions";
+        return "redirect:/transaction";
     }
 
     @PostMapping("/user/{userId}/delete/{id}")
@@ -63,6 +63,6 @@ public class TransactionController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete transaction: " + e.getMessage());
         }
-        return "redirect:/transactions";
+        return "redirect:/transaction";
     }
 }
