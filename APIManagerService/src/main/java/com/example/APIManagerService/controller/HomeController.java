@@ -1,6 +1,5 @@
 package com.example.APIManagerService.controller;
 
-import com.example.APIManagerService.aspects.RateLimiting;
 import com.example.APIManagerService.entity.Budgets;
 import com.example.APIManagerService.entity.Expenses;
 import com.example.APIManagerService.entity.Transactions;
@@ -32,7 +31,6 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    @RateLimiting
     public String getHomePage(@CookieValue("active-user-id") Long userId, Model model) {
         List<Transactions> transactions = transactionService.getAllTransactions(userId);
         List<Budgets> budgets = budgetService.getAllUserBudgets(userId);

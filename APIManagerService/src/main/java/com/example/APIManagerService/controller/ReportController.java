@@ -1,5 +1,6 @@
 package com.example.APIManagerService.controller;
 
+import com.example.APIManagerService.aspects.RateLimiting;
 import com.example.APIManagerService.service.CategoryService;
 import com.example.APIManagerService.service.ExpenseService;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class ReportController {
     }
 
     @GetMapping()
+    @RateLimiting
     public String getReports(Model model, @CookieValue("active-user-id") Long id) {
         // Getting Expenses Over Time data
         Map<String, List<?>> monthlyExpenses = expenseService.getMonthlyExpenseReport(id);

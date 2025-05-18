@@ -14,4 +14,16 @@ public class CustomExceptionHandler {
         redirectAttributes.addFlashAttribute("user", new LoginRequestDTO());
         return "redirect:/Authentication/login";
     }
+
+    @ExceptionHandler({RateLimitExceededException.class})
+    public String redirectToHome(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Too many requests! Please wait 1 minute.");
+        return "redirect:/home";
+    }
+
+    @ExceptionHandler({Exception.class})
+    public String genericError(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Something went wrong. Please try again.");
+        return "redirect:/home";
+    }
 }
