@@ -20,7 +20,11 @@ public class LoginController {
     private AuthenticationService authenticationService;
 
     @GetMapping("/Authentication/login")
-    public String loginPage(Model model) {
+    public String loginPage(Model model, HttpServletResponse response) {
+        Cookie cookie = new Cookie("blanco-jwt", null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         model.addAttribute("user", new LoginRequestDTO());
         return "login";
     }
