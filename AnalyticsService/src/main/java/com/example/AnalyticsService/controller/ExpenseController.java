@@ -35,13 +35,7 @@ public class ExpenseController {
 
     @GetMapping("/monthly-report/user/{id}")
     public Map<String, List<?>> getMonthlyReport(@PathVariable Long id) {
-        return expenseService.getUserExpensesOverPeriod(id, "monthly");
+        return expenseService.getUserExpensesOverPeriod(id);
     }
-
-    @GetMapping("/weekly-report/user/{id}")
-    public Map<String, List<?>> getWeeklyReport(@PathVariable Long id) {
-        return expenseService.getUserExpensesOverPeriod(id, "weekly");
-    }
-
 
 }

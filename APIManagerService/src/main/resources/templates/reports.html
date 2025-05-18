@@ -55,16 +55,12 @@
 <body>
 <!-- Navigation Bar -->
 <!-- Include the header -->
-<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header(activePage='report', userId=${userId})}"></div>
 
 <div class="reports-container">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2>Financial Reports</h2>
-            <div class="btn-group">
-                <button type="button" class="btn btn-outline-primary" onclick="updateDateRange('week')">Week</button>
-                <button type="button" class="btn btn-outline-primary" onclick="updateDateRange('month')">Month</button>
-            </div>
         </div>
 
         <!-- Charts Row -->

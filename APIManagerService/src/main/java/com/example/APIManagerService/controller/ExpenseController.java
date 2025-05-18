@@ -17,9 +17,13 @@ import java.util.List;
 @RequestMapping("/expenses")
 public class ExpenseController {
 
-    @Autowired
     private ExpenseService expenseService;
     private CategoryService categoryService;
+
+    public ExpenseController(ExpenseService expenseService, CategoryService categoryService) {
+        this.expenseService = expenseService;
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("/user/{userId}")
     public String getExpensesPage(@PathVariable Long userId, Model model) {

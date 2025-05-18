@@ -11,6 +11,19 @@
             background-color: #f8f9fa;
         }
 
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+
+        .nav-link {
+            color: #495057;
+        }
 
         .card {
             border-radius: 10px;
@@ -35,7 +48,7 @@
 <body>
 <!-- Navigation Bar -->
 <!-- Include the header -->
-<div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header(activePage='budget', userId=${userId})}"></div>
 
 <!-- Main Content -->
 <div class="budgets-container">

@@ -39,7 +39,7 @@ public class HomeController {
         model.addAttribute("transactions", transactions);
         model.addAttribute("budgets", budgets);
         model.addAttribute("expenses", expenses);
-
+        model.addAttribute("userId", userId);
         return "home";
     }
 }

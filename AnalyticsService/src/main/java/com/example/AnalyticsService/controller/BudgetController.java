@@ -36,8 +36,4 @@ public class BudgetController {
         return budgetService.getBudgetsByCategoryId(id);
     }
 
-
-
-
-
 }

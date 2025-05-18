@@ -41,8 +41,8 @@ public class ExpenseService {
         }
     }
 
-    public Map<String, List<?>> getUserExpensesOverPeriod(Long userId, String period) {
-        String url = baseurl + "/" + period + "-report/user/" + userId;
+    public Map<String, List<?>> getUserExpensesOverPeriod(Long userId) {
+        String url = baseurl + "/monthly-report/user/" + userId;
         ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
         List<String> dates = new ArrayList<>();
         List<Double> amounts = new ArrayList<>();

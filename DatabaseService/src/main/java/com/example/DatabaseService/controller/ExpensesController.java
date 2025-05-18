@@ -1,6 +1,7 @@
 package com.example.DatabaseService.controller;
 
 import com.example.DatabaseService.DTO.CategoryExpenseDTO;
+import com.example.DatabaseService.DTO.CreateExpenseResponse;
 import com.example.DatabaseService.DTO.CreateExpenseDTO;
 import com.example.DatabaseService.DTO.UpdateExpenseDTO;
 import com.example.DatabaseService.entity.Expenses;
@@ -28,7 +29,7 @@ public class ExpensesController {
 
 
     @GetMapping
-    public List<Expenses> getAllExpenses() {
+    public List<CreateExpenseResponse> getAllExpenses() {
         return expensesService.getAllExpenses();
     }
 
@@ -42,21 +43,15 @@ public class ExpensesController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/user/{userId}/expenses-by-category")
-    public List<CategoryExpenseDTO> getExpensesByCategory(@PathVariable Long userId) {
-        return expensesService.getTotalExpenseAmountByCategory(userId);
-    }
-
     //Generate Monthly Report
     @GetMapping("/monthly-report/user/{id}")
     public List<Expenses> getMonthlyReport(@PathVariable Long id) {
         return expensesService.getUserMonthlyExpenses(id);
     }
 
-    //Generate Weekly Report
-    @GetMapping("/weekly-report/user/{id}")
-    public List<Expenses> getWeeklyReport(@PathVariable Long id) {
-        return expensesService.getUserWeeklyExpenses(id);
+    @GetMapping("/user/{userId}/expenses-by-category")
+    public List<CategoryExpenseDTO> getExpensesByCategory(@PathVariable Long userId) {
+        return expensesService.getTotalExpenseAmountByCategory(userId);
     }
 
     @PostMapping
@@ -88,7 +83,7 @@ public class ExpensesController {
         if (expenses != null && !expenses.isEmpty()) {
             return ResponseEntity.ok(expenses);
         }
-       return new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK);
+        return new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK);
     }
 
     // get expenses by date

@@ -1,6 +1,7 @@
 package com.example.DatabaseService.service;
 
 import com.example.DatabaseService.DTO.CategoryExpenseDTO;
+import com.example.DatabaseService.DTO.CreateExpenseResponse;
 import com.example.DatabaseService.DTO.CreateExpenseDTO;
 import com.example.DatabaseService.DTO.UpdateExpenseDTO;
 import com.example.DatabaseService.entity.Categories;
@@ -14,7 +15,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -37,8 +37,19 @@ public class ExpensesService {
         this.usersRepository = usersRepository;
     }
 
-    public List<Expenses> getAllExpenses() {
-        return expensesRepository.findAll();
+    public List<CreateExpenseResponse> getAllExpenses() {
+        List<Expenses> expenses = expensesRepository.findAll();
+        if (expenses == null) return List.of();
+        List<CreateExpenseResponse> createExpenseResponse = new ArrayList<>();
+        for (Expenses expense : expenses) {
+            CreateExpenseResponse dto = new CreateExpenseResponse();
+            BeanUtils.copyProperties(expense, dto);
+            dto.setCategoryId(expense.getCategory().getId());
+            dto.setUserId(expense.getUser().getId());
+            createExpenseResponse.add(dto);
+        }
+
+        return createExpenseResponse;
     }
 
     public Expenses getExpenseById(Long id) {
@@ -85,13 +96,6 @@ public class ExpensesService {
     public List<Expenses> getUserMonthlyExpenses(Long userId) {
         LocalDate firstDateOfMonth = LocalDate.now().withDayOfMonth(1);
         Date startDate = Date.from(firstDateOfMonth.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        return expensesRepository.getUserExpenses(startDate, userId);
-    }
-
-    public List<Expenses> getUserWeeklyExpenses(Long userId) {
-        LocalDate now = LocalDate.now();
-        LocalDate startOfWeek = now.with(DayOfWeek.SATURDAY);
-        Date startDate = Date.from(startOfWeek.atStartOfDay(ZoneId.systemDefault()).toInstant());
         return expensesRepository.getUserExpenses(startDate, userId);
     }
 

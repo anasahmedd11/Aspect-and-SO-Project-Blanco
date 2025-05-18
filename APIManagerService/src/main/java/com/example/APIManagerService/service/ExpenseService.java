@@ -30,22 +30,15 @@ public class ExpenseService {
         return response.getBody();
     }
 
-    public Map<String, List<?>> getWeeklyExpenseReport(Long id) {
-        String url = analyticsService + "/weekly-report/user/" + id;
-        ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
-        return response.getBody();
-    }
 
     public List<Expenses> getAllExpenses(Long userId) {
         String url = moneyManagementServiceUrl + "/user/" + userId;
-        ResponseEntity<List<Expenses>> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<Expenses>>() {
-                }
-        );
-        return response.getBody();
+        ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
+        for (Expenses expense : response.getBody()) {
+            System.out.println("NoTHERE");
+            System.out.println(expense.getCategoryId());
+        }
+        return List.of(response.getBody());
     }
 
     public Expenses getExpenseById(Long id) {

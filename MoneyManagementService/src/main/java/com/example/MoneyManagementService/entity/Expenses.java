@@ -16,17 +16,17 @@ public class Expenses {
 
 
     private Long id;
-    private Long user_id;
+    private Long userId;
     private Double amount;
-    private Categories category;
+    private Long categoryId;
     private String notes;
     private Date date;
 
 
-    public Expenses(Long userId, Double amount, Categories categoryId, String notes, Date date) {
-        this.user_id = userId;
+    public Expenses(Long userId, Double amount, Long categoryId, String notes, Date date) {
+        this.userId = userId;
         this.amount = amount;
-        this.category = categoryId;
+        this.categoryId = categoryId;
         this.notes = notes;
         this.date = date;
     }
