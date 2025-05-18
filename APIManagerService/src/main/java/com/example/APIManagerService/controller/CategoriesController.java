@@ -1,7 +1,5 @@
 package com.example.APIManagerService.controller;
 
-
-import com.example.APIManagerService.config.RestTemplateConfig;
 import com.example.APIManagerService.entity.Categories;
 import com.example.APIManagerService.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

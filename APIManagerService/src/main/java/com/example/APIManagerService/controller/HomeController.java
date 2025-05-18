@@ -9,8 +9,8 @@ import com.example.APIManagerService.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -30,8 +30,8 @@ public class HomeController {
         this.expenseService = expenseService;
     }
 
-    @GetMapping("/home/{userId}")
-    public String getHomePage(@PathVariable Long userId, Model model) {
+    @GetMapping("/home")
+    public String getHomePage(@CookieValue("active-user-id") Long userId, Model model) {
         List<Transactions> transactions = transactionService.getAllTransactions(userId);
         List<Budgets> budgets = budgetService.getAllUserBudgets(userId);
         List<Expenses> expenses = expenseService.getAllExpenses(userId);

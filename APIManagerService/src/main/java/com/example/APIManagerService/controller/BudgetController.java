@@ -24,8 +24,8 @@ public class BudgetController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/user/{userId}")
-    public String getAllUserBudgets(@PathVariable Long userId, Model model) {
+    @GetMapping()
+    public String getAllUserBudgets(@CookieValue("active-user-id") Long userId, Model model) {
 
         List<Budgets> budgets = budgetService.getAllUserBudgets(userId);
         List<Categories> categories = categoryService.getAllCategories();
@@ -36,8 +36,8 @@ public class BudgetController {
         return "budgets";
     }
 
-    @PostMapping("/user/{userId}/create")
-    public String createBudget(@PathVariable Long userId,
+    @PostMapping("/create")
+    public String createBudget(@CookieValue("active-user-id") Long userId,
                                @ModelAttribute("newBudget") Budgets budget, RedirectAttributes redirectAttributes) {
         try {
             budget.setUserId(userId);
@@ -46,11 +46,11 @@ public class BudgetController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to create budget: " + e.getMessage());
         }
-        return "redirect:/budgets/user/" + userId;
+        return "redirect:/budgets";
     }
 
-    @PostMapping("/user/{userId}/update/{id}")
-    public String updateBudget(@PathVariable Long userId,
+    @PostMapping("/update/{id}")
+    public String updateBudget(@CookieValue("active-user-id") Long userId,
                                @PathVariable Long id,
                                @ModelAttribute Budgets budget,
                                RedirectAttributes redirectAttributes) {
@@ -61,11 +61,11 @@ public class BudgetController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to update budget: " + e.getMessage());
         }
-        return "redirect:/budgets/user/" + userId;
+        return "redirect:/budgets";
     }
 
-    @PostMapping("/user/{userId}/delete/{id}")
-    public String deleteBudget(@PathVariable Long userId,
+    @PostMapping("/delete/{id}")
+    public String deleteBudget(@CookieValue("active-user-id") Long userId,
                                @PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
             budgetService.deleteBudget(id);
@@ -73,7 +73,7 @@ public class BudgetController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete budget: " + e.getMessage());
         }
-        return "redirect:/budgets/user/" + userId;
+        return "redirect:/budgets";
     }
 
 

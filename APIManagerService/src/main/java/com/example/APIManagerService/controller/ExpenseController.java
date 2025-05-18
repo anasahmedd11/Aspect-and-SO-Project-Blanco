@@ -1,11 +1,9 @@
 package com.example.APIManagerService.controller;
 
-import com.example.APIManagerService.entity.Budgets;
 import com.example.APIManagerService.entity.Categories;
 import com.example.APIManagerService.entity.Expenses;
 import com.example.APIManagerService.service.CategoryService;
 import com.example.APIManagerService.service.ExpenseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +23,8 @@ public class ExpenseController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/user/{userId}")
-    public String getExpensesPage(@PathVariable Long userId, Model model) {
+    @GetMapping()
+    public String getExpensesPage(@CookieValue("active-user-id") Long userId, Model model) {
         List<Expenses> expenses = expenseService.getAllExpenses(userId);
         List<Categories> categories = categoryService.getAllCategories();
         model.addAttribute("expenses", expenses);
@@ -36,8 +34,8 @@ public class ExpenseController {
         return "expenses";
     }
 
-    @PostMapping("/user/{userId}/create")
-    public String createExpense(@PathVariable Long userId,
+    @PostMapping("/create")
+    public String createExpense(@CookieValue("active-user-id") Long userId,
                                 @ModelAttribute("newExpense") Expenses expense,
                                 RedirectAttributes redirectAttributes) {
         try {
@@ -47,11 +45,11 @@ public class ExpenseController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to create expense: " + e.getMessage());
         }
-        return "redirect:/expenses/user/" + userId;
+        return "redirect:/expenses";
     }
 
-    @PostMapping("/user/{userId}/update/{id}")
-    public String updateExpense(@PathVariable Long userId,
+    @PostMapping("/update/{id}")
+    public String updateExpense(@CookieValue("active-user-id") Long userId,
                                 @PathVariable Long id,
                                 @ModelAttribute Expenses expense,
                                 RedirectAttributes redirectAttributes) {
@@ -62,11 +60,11 @@ public class ExpenseController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to update expense: " + e.getMessage());
         }
-        return "redirect:/expenses/user/" + userId;
+        return "redirect:/expenses";
     }
 
-    @PostMapping("/user/{userId}/delete/{id}")
-    public String deleteExpense(@PathVariable Long userId,
+    @PostMapping("/delete/{id}")
+    public String deleteExpense(@CookieValue("active-user-id") Long userId,
                                 @PathVariable Long id,
                                 RedirectAttributes redirectAttributes) {
         try {
@@ -75,6 +73,6 @@ public class ExpenseController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete expense: " + e.getMessage());
         }
-        return "redirect:/expenses/user/" + userId;
+        return "redirect:/expenses";
     }
 }

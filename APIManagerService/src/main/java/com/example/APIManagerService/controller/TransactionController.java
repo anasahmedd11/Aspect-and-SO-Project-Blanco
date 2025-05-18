@@ -18,16 +18,16 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("/user/{userId}")
-    public String getTransactionsPage(@PathVariable Long userId, Model model) {
+    @GetMapping()
+    public String getTransactionsPage(@CookieValue("active-user-id") Long userId, Model model) {
         model.addAttribute("transactions", transactionService.getAllTransactions(userId));
         model.addAttribute("newTransaction", new Transactions());
         model.addAttribute("userId", userId);
         return "transactions";
     }
 
-    @PostMapping("/user/{userId}/create")
-    public String createTransaction(@PathVariable Long userId,
+    @PostMapping("/create")
+    public String createTransaction(@CookieValue("active-user-id") Long userId,
                                     @ModelAttribute("newTransaction") Transactions transaction,
                                     RedirectAttributes redirectAttributes) {
         try {
@@ -36,11 +36,11 @@ public class TransactionController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to create transaction: " + e.getMessage());
         }
-        return "redirect:/transactions/user/" + userId;
+        return "redirect:/transactions";
     }
 
-    @PostMapping("/user/{userId}/update/{id}")
-    public String updateTransaction(@PathVariable Long userId,
+    @PostMapping("/update/{id}")
+    public String updateTransaction(@CookieValue("active-user-id") Long userId,
                                     @PathVariable Long id,
                                     @ModelAttribute Transactions transaction,
                                     RedirectAttributes redirectAttributes) {
@@ -50,7 +50,7 @@ public class TransactionController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to update transaction: " + e.getMessage());
         }
-        return "redirect:/transactions/user/" + userId;
+        return "redirect:/transactions";
     }
 
     @PostMapping("/user/{userId}/delete/{id}")
@@ -63,6 +63,6 @@ public class TransactionController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete transaction: " + e.getMessage());
         }
-        return "redirect:/transactions/user/" + userId;
+        return "redirect:/transactions";
     }
 }

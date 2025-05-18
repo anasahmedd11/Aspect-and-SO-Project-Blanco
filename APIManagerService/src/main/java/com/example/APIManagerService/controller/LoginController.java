@@ -21,10 +21,16 @@ public class LoginController {
 
     @GetMapping("/Authentication/login")
     public String loginPage(Model model, HttpServletResponse response) {
-        Cookie cookie = new Cookie("blanco-jwt", null);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
+        Cookie tokenCookie = new Cookie("blanco-jwt", null);
+        tokenCookie.setPath("/");
+        tokenCookie.setMaxAge(0);
+        response.addCookie(tokenCookie);
+
+        Cookie idCookie = new Cookie("active-user-id", null);
+        idCookie.setPath("/");
+        idCookie.setMaxAge(0);
+        response.addCookie(tokenCookie);
+
         model.addAttribute("user", new LoginRequestDTO());
         return "login";
     }
@@ -36,13 +42,18 @@ public class LoginController {
         try {
             LoginResponseDTO loginResponse = authenticationService.login(user);
 
-            Cookie cookie = new Cookie("blanco-jwt", loginResponse.getToken());
-            cookie.setPath("/");
-            cookie.setMaxAge(60 * 60 * 24);
-            response.addCookie(cookie);
+            Cookie tokenCookie = new Cookie("blanco-jwt", loginResponse.getToken());
+            tokenCookie.setPath("/");
+            tokenCookie.setMaxAge(60 * 60 * 24);
+            response.addCookie(tokenCookie);
+
+            Cookie idCookie = new Cookie("active-user-id", loginResponse.getId().toString());
+            idCookie.setPath("/");
+            idCookie.setMaxAge(60 * 60 * 24);
+            response.addCookie(idCookie);
 
             redirectAttributes.addFlashAttribute("message", "Logged in successfully!");
-            return "redirect:/home/" + loginResponse.getId();
+            return "redirect:/home";
         }
         catch (HttpClientErrorException e) {
             redirectAttributes.addFlashAttribute("message", "Login failed! Please try again.");

@@ -4,8 +4,8 @@ import com.example.APIManagerService.service.CategoryService;
 import com.example.APIManagerService.service.ExpenseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -23,8 +23,8 @@ public class ReportController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{id}")
-    public String getReports(Model model, @PathVariable Long id) {
+    @GetMapping()
+    public String getReports(Model model, @CookieValue("active-user-id") Long id) {
         // Getting Expenses Over Time data
         Map<String, List<?>> monthlyExpenses = expenseService.getMonthlyExpenseReport(id);
         List<String> monthlyDates = (List<String>) monthlyExpenses.get("dates");
