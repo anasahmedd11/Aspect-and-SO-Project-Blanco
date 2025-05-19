@@ -2,6 +2,7 @@ package com.example.DatabaseService.DTO;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -20,6 +21,7 @@ public class CreateBudgetDTO {
     private Date createdAt;
 
     @Future(message = "Expires at must be in the future")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expiresAt;
 
     @NotNull

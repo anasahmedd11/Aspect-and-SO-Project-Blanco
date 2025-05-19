@@ -30,13 +30,14 @@ public class ExpenseController {
         model.addAttribute("expenses", expenses);
         model.addAttribute("categories", categories);
         model.addAttribute("newExpense", new Expenses());
+        model.addAttribute("editExpense", new Expenses());
         model.addAttribute("userId", userId);
         return "expenses";
     }
 
     @PostMapping("/create")
     public String createExpense(@CookieValue("active-user-id") Long userId,
-                                @ModelAttribute("newExpense") Expenses expense,
+                                @ModelAttribute("expense") Expenses expense,
                                 RedirectAttributes redirectAttributes) {
         try {
             expense.setUserId(userId);
@@ -51,11 +52,11 @@ public class ExpenseController {
     @PostMapping("/update/{id}")
     public String updateExpense(@CookieValue("active-user-id") Long userId,
                                 @PathVariable Long id,
-                                @ModelAttribute Expenses expense,
+                                @ModelAttribute("editExpense") Expenses editExpense,
                                 RedirectAttributes redirectAttributes) {
         try {
-            expense.setUserId(userId);
-            expenseService.updateExpense(id, expense);
+            editExpense.setUserId(userId);
+            expenseService.updateExpense(id, editExpense);
             redirectAttributes.addFlashAttribute("successMessage", "Expense updated successfully!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to update expense: " + e.getMessage());

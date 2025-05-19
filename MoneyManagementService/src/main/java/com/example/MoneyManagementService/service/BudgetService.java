@@ -42,8 +42,7 @@ public class BudgetService {
     }
 
     public Budgets createBudget(BudgetDTO budgetDTO) {
-        String url = databaseServiceUrl;
-        ResponseEntity<Budgets> response = restTemplate.postForEntity(url, budgetDTO, Budgets.class);
+        ResponseEntity<Budgets> response = restTemplate.postForEntity(databaseServiceUrl, budgetDTO, Budgets.class);
         return response.getBody();
     }
 
