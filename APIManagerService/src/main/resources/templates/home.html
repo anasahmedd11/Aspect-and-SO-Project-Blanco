@@ -126,7 +126,7 @@
                         </thead>
                         <tbody>
                         <tr th:if="${budgets != null}" th:each="budget : ${budgets}">
-                            <td th:text="${budget.category}"></td>
+                            <td th:text="${budget.category.name}"></td>
                             <td th:text="${budget.limitAmount}"></td>
                             <td th:text="${budget.currentAmount}"></td>
                             <td th:text="${budget.limitAmount - budget.currentAmount}"></td>
