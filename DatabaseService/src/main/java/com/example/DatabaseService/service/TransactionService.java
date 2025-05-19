@@ -1,7 +1,6 @@
 package com.example.DatabaseService.service;
 
 import com.example.DatabaseService.DTO.CreateTransactionDTO;
-import com.example.DatabaseService.DTO.GetTransactionDTO;
 import com.example.DatabaseService.DTO.UpdateTransactionDTO;
 import com.example.DatabaseService.entity.Expenses;
 import com.example.DatabaseService.entity.Transactions;
@@ -26,18 +25,6 @@ public class TransactionService {
     private TransactionRepository transactionRepository;
 
 
-    public List<GetTransactionDTO> getAllUserTransactions(Long userId) {
-        List<Transactions> transactions = transactionRepository.findBySenderId(userId);
-        List<GetTransactionDTO> transactionDTOS = new ArrayList<>();
-        for (Transactions transaction : transactions) {
-            GetTransactionDTO transactionDTO = new GetTransactionDTO(transaction.getSender().getId(),
-                    transaction.getReceiver().getId(), transaction.getExpenses().getId());
-            transactionDTOS.add(transactionDTO);
-            transactionDTOS.add(transactionDTO);
-        }
-
-        return transactionDTOS;
-    }
 
     public Transactions createTransaction(CreateTransactionDTO transactionDTO) {
 
