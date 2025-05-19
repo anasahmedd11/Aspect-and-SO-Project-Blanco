@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -17,6 +18,7 @@ public class Budgets {
     private double currentAmount;
     private double limitAmount;
     private Date createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expiresAt;
     private Long user_id;
     private Long category_id;

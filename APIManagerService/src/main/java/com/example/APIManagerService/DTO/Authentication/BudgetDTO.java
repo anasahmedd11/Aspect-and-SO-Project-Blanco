@@ -1,7 +1,5 @@
-package com.example.MoneyManagementService.DTO;
+package com.example.APIManagerService.DTO.Authentication;
 
-
-import com.example.MoneyManagementService.entity.Categories;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +12,8 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class BudgetDTO {
+
     private double currentAmount;
     private double limitAmount;
     private Date createdAt;
@@ -23,6 +21,8 @@ public class BudgetDTO {
     private Date expiresAt;
     private Long userId;
     private Long categoryId;
+
+
 
 
 }

@@ -2,9 +2,14 @@ package com.example.APIManagerService.service;
 
 import com.example.APIManagerService.entity.Budgets;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.example.APIManagerService.DTO.Authentication.BudgetDTO;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -18,12 +23,10 @@ public class BudgetService {
         this.restTemplate = restTemplate;
     }
 
-    // Add methods to interact with the Money Management Service API
-
     public List<Budgets> getAllUserBudgets(Long userId) {
         String url = baseUrl + "/user/" + userId;
-        Budgets[] budgets = restTemplate.getForObject(url, Budgets[].class);
-        return List.of(budgets);
+        ResponseEntity<Budgets[]> response = restTemplate.getForEntity(url, Budgets[].class);
+        return Arrays.asList(response.getBody());
     }
 
     public Budgets getBudgetById(Long id) {
@@ -31,26 +34,40 @@ public class BudgetService {
         return restTemplate.getForObject(url, Budgets.class);
     }
 
-    public void createBudget(Budgets budget) {
-        String url = baseUrl;
-        restTemplate.postForObject(url, budget, Budgets.class);
+    public void createBudget(BudgetDTO budgetDTO) {
+
+        ResponseEntity<Budgets> response = restTemplate.postForEntity(baseUrl, budgetDTO, Budgets.class);
+        if (response.getStatusCode().is2xxSuccessful()) {
+            System.out.println("Budget created successfully: " + response.getBody());
+        } else {
+            System.out.println("Failed to create budget: " + response.getStatusCode());
+        }
     }
 
     public void updateBudget(Long id, Budgets budget) {
         String url = baseUrl + "/" + id;
-        restTemplate.put(url, budget);
+        // Convert Budgets entity to BudgetDTO
+        var budgetDTO = new BudgetDTO(
+                budget.getCurrentAmount(),
+                budget.getLimitAmount(),
+                budget.getCreatedAt(),
+                budget.getExpiresAt(),
+                budget.getUserId(),
+                budget.getCategoryId()
+        );
+
+
+        HttpEntity<BudgetDTO> requestEntity = new HttpEntity<>(budgetDTO);
+        ResponseEntity<Budgets[]> response = restTemplate.exchange(
+                url,
+                HttpMethod.PUT,
+                requestEntity,
+                Budgets[].class
+        );
     }
 
     public void deleteBudget(Long id) {
         String url = baseUrl + "/" + id;
         restTemplate.delete(url);
     }
-
-
-
-
-
-
-
-
 }
