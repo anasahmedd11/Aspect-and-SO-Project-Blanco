@@ -1,6 +1,6 @@
 package com.example.APIManagerService.controller;
 
-import com.example.APIManagerService.DTO.Authentication.BudgetDTO;
+import com.example.APIManagerService.DTO.CreateBudgetDTO;
 import com.example.APIManagerService.entity.Budgets;
 import com.example.APIManagerService.entity.Categories;
 import com.example.APIManagerService.service.BudgetService;
@@ -34,6 +34,9 @@ public class BudgetController {
         model.addAttribute("budgets", budgets);
         model.addAttribute("categories", categories);
         model.addAttribute("newBudget", new Budgets());
+        var editBudget = new Budgets();
+        editBudget.setCategory(new Categories());
+        model.addAttribute("editBudget", editBudget);
         model.addAttribute("userId", userId);
         return "budgets";
     }
@@ -44,15 +47,13 @@ public class BudgetController {
                                RedirectAttributes redirectAttributes) {
         try {
 
-            BudgetDTO budgetDTO = new BudgetDTO();
+            CreateBudgetDTO budgetDTO = new CreateBudgetDTO();
             budgetDTO.setCurrentAmount(budget.getCurrentAmount());
             budgetDTO.setLimitAmount(budget.getLimitAmount());
             budgetDTO.setCreatedAt(new Date()); // or use budget.getCreatedAt() if available
             budgetDTO.setExpiresAt(budget.getExpiresAt());
+            budgetDTO.setCategoryId(budget.getCategory().getId());
             budgetDTO.setUserId(userId);
-            budgetDTO.setCategoryId(budget.getCategoryId());
-
-
             budgetService.createBudget(budgetDTO);
 
             redirectAttributes.addFlashAttribute("successMessage", "Budget created successfully!");
@@ -68,23 +69,23 @@ public class BudgetController {
     @PostMapping("/update/{id}")
     public String updateBudget(@CookieValue("active-user-id") Long userId,
                                @PathVariable Long id,
-                               @ModelAttribute Budgets budget,
+                               @ModelAttribute Budgets editBudget,
                                RedirectAttributes redirectAttributes) {
         try {
-            budget.setUserId(userId);
+            editBudget.setUserId(userId);
 
             // Validate dates
-            if (budget.getExpiresAt() != null && budget.getCreatedAt() != null
-                    && budget.getExpiresAt().before(budget.getCreatedAt())) {
+            if (editBudget.getExpiresAt() != null && editBudget.getCreatedAt() != null
+                    && editBudget.getExpiresAt().before(editBudget.getCreatedAt())) {
                 throw new IllegalArgumentException("Expiration date must be after creation date");
             }
 
             // Validate limit amount
-            if (budget.getLimitAmount() <= 0) {
+            if (editBudget.getLimitAmount() <= 0) {
                 throw new IllegalArgumentException("Limit amount must be greater than 0");
             }
 
-            budgetService.updateBudget(id, budget);
+            budgetService.updateBudget(id, editBudget);
             redirectAttributes.addFlashAttribute("successMessage", "Budget updated successfully!");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Failed to update budget: " + e.getMessage());

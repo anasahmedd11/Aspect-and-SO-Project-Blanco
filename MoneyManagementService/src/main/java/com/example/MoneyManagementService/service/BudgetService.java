@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.HttpStatusCodeException;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -46,21 +47,20 @@ public class BudgetService {
         return response.getBody();
     }
 
-    public List<Budgets> updateBudget(Long id, BudgetDTO updateBudgetDTO) {
+    public Budgets updateBudget(Long id, BudgetDTO updateBudgetDTO) {
         String url = databaseServiceUrl + "/" + id;
         HttpEntity<BudgetDTO> requestEntity = new HttpEntity<>(updateBudgetDTO);
         try {
-            ResponseEntity<Budgets[]> response = restTemplate.exchange(
+            ResponseEntity<Budgets> response = restTemplate.exchange(
                     url,
                     HttpMethod.PUT,
                     requestEntity,
-                    Budgets[].class
+                    Budgets.class
             );
-            Budgets[] budgetsArray = response.getBody();
-            return budgetsArray != null ? Arrays.asList(budgetsArray) : List.of();
+            return response.getBody();
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
-                return List.of(); // return empty list if not found
+                return null;
             }
             throw e;
         }

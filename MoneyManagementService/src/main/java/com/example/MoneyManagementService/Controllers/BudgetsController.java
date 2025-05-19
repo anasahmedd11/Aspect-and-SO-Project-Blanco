@@ -43,9 +43,9 @@ public class BudgetsController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<List<Budgets>> updateBudget(@PathVariable Long id, @RequestBody BudgetDTO budgetDTO) {
-        List<Budgets> updatedBudgets = budgetService.updateBudget(id, budgetDTO);
-        if (updatedBudgets.isEmpty()) {
+    public ResponseEntity<Budgets> updateBudget(@PathVariable Long id, @RequestBody BudgetDTO budgetDTO) {
+        Budgets updatedBudgets = budgetService.updateBudget(id, budgetDTO);
+        if (updatedBudgets == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(updatedBudgets, HttpStatus.OK);
