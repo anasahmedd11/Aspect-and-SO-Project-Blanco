@@ -105,7 +105,7 @@
                                             th:data-bs-target="'#editBudgetModal' + ${budget.id}">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <form th:action="@{/budgets/user/{userId}/delete/{id}(userId=${userId}, id=${budget.id})}"
+                                    <form th:action="@{/budgets/delete/{id}(id=${budget.id})}"
                                           method="post" style="display:inline-block;">
                                         <button type="submit" class="btn btn-sm btn-outline-danger"
                                                 onclick="return confirm('Are you sure you want to delete this budget?');">
@@ -127,7 +127,7 @@
 <div class="modal fade" id="createBudgetModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form th:action="@{/budgets/user/{userId}/create(userId=${userId})}" th:object="${newBudget}" method="post">
+            <form th:action="@{/budgets/create}" th:object="${newBudget}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title">Create New Budget</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -169,7 +169,7 @@
 <div th:each="budget : ${budgets}" th:id="'editBudgetModal' + ${budget.id}" class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form th:action="@{/budgets/user/{userId}/update/{id}(userId=${userId}, id=${budget.id})}"
+            <form th:action="@{/budgets/update/{id}(id=${budget.id})}"
                   th:object="${budget}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit Budget</h5>
