@@ -15,5 +15,5 @@ public class UpdateTransactionDTO {
     private Long receiverId;
 
     @NotNull
-    private Long categoryId;
+    private Long expenseId;
 }

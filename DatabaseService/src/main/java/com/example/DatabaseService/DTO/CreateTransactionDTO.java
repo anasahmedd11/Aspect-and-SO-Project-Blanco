@@ -18,6 +18,6 @@ public class CreateTransactionDTO {
     private Long senderId;
 
     @NotNull
-    private Long categoryId;
+    private Long expenseId;
 
 }

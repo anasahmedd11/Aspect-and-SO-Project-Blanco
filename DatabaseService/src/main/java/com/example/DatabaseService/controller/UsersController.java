@@ -43,6 +43,15 @@ public class UsersController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/user/email/{email}")
+    public ResponseEntity<Long> getUserIdByEmail(@PathVariable String email) {
+        Optional<Users> user = usersService.getUserByEmail(email);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get().getId());
+        }
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping
     public ResponseEntity<Users> createUser(@Valid @RequestBody createUserDTO createUserDTO) {
         try {
@@ -54,21 +63,21 @@ public class UsersController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Users> updateUser(@PathVariable Long id, @Valid @RequestBody updateUserDTO updateUserDTO){
-        try{
+    public ResponseEntity<Users> updateUser(@PathVariable Long id, @Valid @RequestBody updateUserDTO updateUserDTO) {
+        try {
             Users updatedUser = usersService.updateUser(id, updateUserDTO);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Users> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Users> deleteUser(@PathVariable Long id) {
         try {
             usersService.deleteUser(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }

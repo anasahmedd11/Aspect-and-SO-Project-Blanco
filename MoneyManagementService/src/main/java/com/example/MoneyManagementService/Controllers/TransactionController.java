@@ -1,6 +1,5 @@
 package com.example.MoneyManagementService.Controllers;
 
-import com.example.MoneyManagementService.DTO.TransactionDTO;
 import com.example.MoneyManagementService.entity.Transactions;
 import com.example.MoneyManagementService.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +27,15 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Transactions> createTransaction(@RequestBody TransactionDTO transactionDTO) {
-        Transactions transaction = transactionService.createTransaction(transactionDTO);
+    public ResponseEntity<Transactions> createTransaction(@RequestBody Transactions transaction) {
+        transactionService.createTransaction(transaction);
         return new ResponseEntity<>(transaction, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transactions> updateTransaction(@PathVariable Long id, @RequestBody TransactionDTO transactionDTO) {
+    public ResponseEntity<Transactions> updateTransaction(@PathVariable Long id, @RequestBody Transactions transaction) {
         try {
-            Transactions transaction = transactionService.updateTransaction(id, transactionDTO);
+            transactionService.updateTransaction(id, transaction);
             return new ResponseEntity<>(transaction, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

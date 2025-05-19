@@ -39,7 +39,7 @@ public class TransactionService {
         Users receiver = usersRepository.findById(senderId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + receiverId));
 
-        Long expenseId = transactionDTO.getCategoryId();
+        Long expenseId = transactionDTO.getExpenseId();
         Expenses expenses = expensesRepository.findById(expenseId)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + expenseId));
 

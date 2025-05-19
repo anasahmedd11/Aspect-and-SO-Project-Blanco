@@ -46,9 +46,9 @@ public class ExpenseService {
         return restTemplate.getForObject(url, Expenses.class);
     }
 
-    public void createExpense(Expenses expense) {
+    public Expenses createExpense(Expenses expense) {
         String url = moneyManagementServiceUrl;
-        restTemplate.postForObject(url, expense, Expenses.class);
+        return restTemplate.postForObject(url, expense, Expenses.class);
     }
 
     public void updateExpense(Long id, Expenses expense) {

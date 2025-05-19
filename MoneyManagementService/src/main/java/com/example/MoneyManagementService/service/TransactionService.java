@@ -1,6 +1,5 @@
 package com.example.MoneyManagementService.service;
 
-import com.example.MoneyManagementService.DTO.TransactionDTO;
 import com.example.MoneyManagementService.entity.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -22,8 +21,8 @@ public class TransactionService {
         this.restTemplate = restTemplate;
     }
 
-    public Transactions createTransaction(TransactionDTO transactionDTO) {
-        return restTemplate.postForObject(databaseServiceTransactionUrl, transactionDTO, Transactions.class);
+    public Transactions createTransaction(Transactions transaction) {
+        return restTemplate.postForObject(databaseServiceTransactionUrl, transaction, Transactions.class);
     }
 
     public List<Transactions> getAllTransactions(Long userId) {
@@ -36,11 +35,11 @@ public class TransactionService {
         ).getBody();
     }
 
-    public Transactions updateTransaction(Long id, TransactionDTO transactionDTO) {
+    public Transactions updateTransaction(Long id, Transactions transaction) {
         ResponseEntity<Transactions> response = restTemplate.exchange(
                 databaseServiceTransactionUrl + "/" + id,
                 HttpMethod.PUT,
-                new HttpEntity<>(transactionDTO),
+                new HttpEntity<>(transaction),
                 Transactions.class
         );
         return response.getBody();
