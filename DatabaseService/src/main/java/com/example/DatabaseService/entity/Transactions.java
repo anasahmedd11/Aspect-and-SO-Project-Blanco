@@ -18,11 +18,11 @@ public class Transactions {
     @JoinColumn(name = "expense_id", referencedColumnName = "id")
     private Expenses expenses;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "sender_id", referencedColumnName = "id")
     private Users sender;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "receiver_id", referencedColumnName = "id")
     private Users receiver;
 

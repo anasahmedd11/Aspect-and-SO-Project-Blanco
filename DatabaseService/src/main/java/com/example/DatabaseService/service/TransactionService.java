@@ -1,6 +1,7 @@
 package com.example.DatabaseService.service;
 
 import com.example.DatabaseService.DTO.CreateTransactionDTO;
+import com.example.DatabaseService.DTO.GetTransactionDTO;
 import com.example.DatabaseService.DTO.UpdateTransactionDTO;
 import com.example.DatabaseService.entity.Expenses;
 import com.example.DatabaseService.entity.Transactions;
@@ -13,20 +14,29 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 @AllArgsConstructor
-
 public class TransactionService {
     private final UsersRepository usersRepository;
     private final ExpensesRepository expensesRepository;
     private TransactionRepository transactionRepository;
 
 
-    public List<Transactions> getAllUserTransactions(Long userId) {
-        return transactionRepository.findBySenderId(userId);
+    public List<GetTransactionDTO> getAllUserTransactions(Long userId) {
+        List<Transactions> transactions = transactionRepository.findBySenderId(userId);
+        List<GetTransactionDTO> transactionDTOS = new ArrayList<>();
+        for (Transactions transaction : transactions) {
+            GetTransactionDTO transactionDTO = new GetTransactionDTO(transaction.getSender().getId(),
+                    transaction.getReceiver().getId(), transaction.getExpenses().getId());
+            transactionDTOS.add(transactionDTO);
+            transactionDTOS.add(transactionDTO);
+        }
+
+        return transactionDTOS;
     }
 
     public Transactions createTransaction(CreateTransactionDTO transactionDTO) {
