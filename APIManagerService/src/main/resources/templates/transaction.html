@@ -76,20 +76,19 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Amount</th>
+<!--                        <th>Amount</th>-->
                         <th>sender</th>
                         <th>receiver</th>
-                        <th>Date</th>
-
+<!--                        <th>Date</th>-->
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="transaction : ${transactions}">
-                        <td th:text="${transaction.id}"></td>
-                        <td th:text="${transaction.expense.getAmount()}"></td>
+                        <td th:text="${transaction.getId()}"></td>
+<!--                        <td th:text="${transaction.expense.getAmount()}"></td>-->
                         <td th:text="${transaction.getReceiverId()}"></td>
                         <td th:text="${transaction.getSenderId()}"></td>
-                        <td th:text="${transaction.getExpense().getDate()}"></td>
+<!--                        <td th:text="${transaction.getExpense().getDate()}"></td>-->
 
                         <td>
                             <div class="btn-group">

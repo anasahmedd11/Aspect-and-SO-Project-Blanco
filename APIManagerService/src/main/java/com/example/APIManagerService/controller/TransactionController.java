@@ -1,11 +1,8 @@
 package com.example.APIManagerService.controller;
 
 import com.example.APIManagerService.DTO.Authentication.TransactionDTO;
-import com.example.APIManagerService.entity.Expenses;
 import com.example.APIManagerService.entity.Transactions;
-import com.example.APIManagerService.service.ExpenseService;
 import com.example.APIManagerService.service.TransactionService;
-import com.example.APIManagerService.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,20 +15,15 @@ import java.util.List;
 @RequestMapping("/transaction")
 public class TransactionController {
     private final TransactionService transactionService;
-    private final ExpenseService expenseService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService, ExpenseService expenseService) {
+    public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
-        this.expenseService = expenseService;
     }
 
     @GetMapping()
     public String getTransactionsPage(@CookieValue("active-user-id") Long userId, Model model) {
         List<Transactions> transactions = transactionService.getAllTransactions(userId);
-        for (Transactions transaction : transactions) {
-            transaction.setExpense(expenseService.getExpenseById(transaction.getExpenseId()));
-        }
         model.addAttribute("transactions", transactions);
         model.addAttribute("newTransaction", new TransactionDTO());
         return "transaction";
