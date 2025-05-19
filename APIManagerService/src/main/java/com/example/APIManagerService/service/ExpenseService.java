@@ -2,13 +2,10 @@ package com.example.APIManagerService.service;
 
 import com.example.APIManagerService.entity.Expenses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -34,10 +31,6 @@ public class ExpenseService {
     public List<Expenses> getAllExpenses(Long userId) {
         String url = moneyManagementServiceUrl + "/user/" + userId;
         ResponseEntity<Expenses[]> response = restTemplate.getForEntity(url, Expenses[].class);
-        for (Expenses expense : response.getBody()) {
-            System.out.println("NoTHERE");
-            System.out.println(expense.getCategoryId());
-        }
         return List.of(response.getBody());
     }
 

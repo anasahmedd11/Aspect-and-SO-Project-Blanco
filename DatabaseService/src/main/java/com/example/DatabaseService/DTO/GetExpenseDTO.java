@@ -1,4 +1,4 @@
-package com.example.MoneyManagementService.entity;
+package com.example.DatabaseService.DTO;
 
 
 import lombok.AllArgsConstructor;
@@ -12,28 +12,22 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Expenses {
+public class GetExpenseDTO {
 
 
     private Long id;
     private Double amount;
-    private Long categoryId;
     private String categoryName;
     private String notes;
     private Date date;
 
 
-    public Expenses(Double amount, String categoryName, String notes, Date date) {
+    public GetExpenseDTO(Double amount, String categoryName, String notes, Date date) {
         this.amount = amount;
         this.categoryName = categoryName;
         this.notes = notes;
         this.date = date;
     }
 
-    public Expenses(Double amount, Long categoryId, String notes, Date date) {
-        this.amount = amount;
-        this.categoryId = categoryId;
-        this.notes = notes;
-        this.date = date;
-    }
+
 }

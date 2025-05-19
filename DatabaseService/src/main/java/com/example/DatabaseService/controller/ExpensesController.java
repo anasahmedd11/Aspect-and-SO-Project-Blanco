@@ -1,9 +1,6 @@
 package com.example.DatabaseService.controller;
 
-import com.example.DatabaseService.DTO.CategoryExpenseDTO;
-import com.example.DatabaseService.DTO.CreateExpenseResponse;
-import com.example.DatabaseService.DTO.CreateExpenseDTO;
-import com.example.DatabaseService.DTO.UpdateExpenseDTO;
+import com.example.DatabaseService.DTO.*;
 import com.example.DatabaseService.entity.Expenses;
 import com.example.DatabaseService.service.ExpensesService;
 import jakarta.validation.Valid;
@@ -12,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -35,18 +33,37 @@ public class ExpensesController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Expenses> getExpenseById(@PathVariable Long id) {
+    public ResponseEntity<GetExpenseDTO> getExpenseById(@PathVariable Long id) {
         Expenses expense = expensesService.getExpenseById(id);
         if (expense != null) {
-            return ResponseEntity.ok(expense);
+            GetExpenseDTO getExpenseDTO = new GetExpenseDTO(
+                    expense.getId(),
+                    expense.getAmount(),
+                    expense.getCategory().getName(),
+                    expense.getNotes(),
+                    expense.getDate()
+            );
+            return ResponseEntity.ok(getExpenseDTO);
         }
         return ResponseEntity.noContent().build();
     }
 
     //Generate Monthly Report
     @GetMapping("/monthly-report/user/{id}")
-    public List<Expenses> getMonthlyReport(@PathVariable Long id) {
-        return expensesService.getUserMonthlyExpenses(id);
+    public List<GetExpenseDTO> getMonthlyReport(@PathVariable Long id) {
+        List<Expenses> expenses = expensesService.getUserMonthlyExpenses(id);
+        List<GetExpenseDTO> getExpenseDTOs = new ArrayList<>();
+        for (Expenses expense : expenses) {
+            GetExpenseDTO getExpenseDTO = new GetExpenseDTO(
+                    expense.getId(),
+                    expense.getAmount(),
+                    expense.getCategory().getName(),
+                    expense.getNotes(),
+                    expense.getDate()
+            );
+            getExpenseDTOs.add(getExpenseDTO);
+        }
+        return getExpenseDTOs;
     }
 
     @GetMapping("/user/{userId}/expenses-by-category")
@@ -78,20 +95,42 @@ public class ExpensesController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Expenses>> getAllUserExpenses(@PathVariable Long userId) {
+    public ResponseEntity<List<GetExpenseDTO>> getAllUserExpenses(@PathVariable Long userId) {
         List<Expenses> expenses = expensesService.getAllUserExpenses(userId);
         if (expenses != null && !expenses.isEmpty()) {
-            return ResponseEntity.ok(expenses);
+            List<GetExpenseDTO> getExpenseDTOs = new ArrayList<>();
+            for (Expenses expense : expenses) {
+                GetExpenseDTO getExpenseDTO = new GetExpenseDTO(
+                        expense.getId(),
+                        expense.getAmount(),
+                        expense.getCategory().getName(),
+                        expense.getNotes(),
+                        expense.getDate()
+                );
+                getExpenseDTOs.add(getExpenseDTO);
+            }
+            return ResponseEntity.ok(getExpenseDTOs);
         }
         return new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK);
     }
 
     // get expenses by date
     @GetMapping("/user/{userId}/date/{date}")
-    public ResponseEntity<List<Expenses>> getExpensesByDate(@PathVariable Long userId, @PathVariable Date date) {
+    public ResponseEntity<List<GetExpenseDTO>> getExpensesByDate(@PathVariable Long userId, @PathVariable Date date) {
         List<Expenses> expenses = expensesService.getExpensesByDate(userId, date);
         if (expenses != null && !expenses.isEmpty()) {
-            return ResponseEntity.ok(expenses);
+            List<GetExpenseDTO> getExpenseDTOs = new ArrayList<>();
+            for (Expenses expense : expenses) {
+                GetExpenseDTO getExpenseDTO = new GetExpenseDTO(
+                        expense.getId(),
+                        expense.getAmount(),
+                        expense.getCategory().getName(),
+                        expense.getNotes(),
+                        expense.getDate()
+                );
+                getExpenseDTOs.add(getExpenseDTO);
+            }
+            return ResponseEntity.ok(getExpenseDTOs);
         }
         return new ResponseEntity<>(Collections.emptyList(), HttpStatus.OK);
     }

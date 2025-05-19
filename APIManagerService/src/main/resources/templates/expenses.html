@@ -157,8 +157,8 @@
 </div>
 
 <!-- Edit Expense Modal for each expense -->
-<div th:each="expense : ${expenses}"
-     th:id="'editExpenseModal' + ${expense.id}"
+<div th:each="editExpense : ${expenses}"
+     th:id="'editExpenseModal' + ${editExpense.id}"
      class="modal fade" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -167,18 +167,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form th:action="@{/expenses/update/{id}(id=${expense.id})}"
-                      th:object="${expense}" method="post">
-                    <div class="mb-3">
-                        <label class="form-label">Category</label>
-                        <select class="form-select" th:field="*{categoryId}" required>
-                            <option value="">Select Category</option>
-                            <option th:each="category : ${categories}"
-                                    th:value="${category.id}"
-                                    th:text="${category.name}">Category
-                            </option>
-                        </select>
-                    </div>
+                <form th:action="@{/expenses/update/{id}(id=${editExpense.id})}"
+                      th:object="${editExpense}" method="post">
                     <div class="mb-3">
                         <label class="form-label">Amount</label>
                         <input type="number" class="form-control" th:field="*{amount}" step="100.0" required>
