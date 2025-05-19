@@ -26,13 +26,14 @@ public class TransactionService {
     }
 
     public List<Transactions> getAllTransactions(Long userId) {
-        return restTemplate.exchange(
+        ResponseEntity<List<Transactions>> response = restTemplate.exchange(
                 databaseServiceTransactionUrl + "/user/" + userId,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<Transactions>>() {
                 }
-        ).getBody();
+        );
+        return response.getBody();
     }
 
     public Transactions updateTransaction(Long id, Transactions transaction) {

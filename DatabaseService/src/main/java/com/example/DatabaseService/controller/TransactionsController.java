@@ -1,6 +1,7 @@
 package com.example.DatabaseService.controller;
 
 import com.example.DatabaseService.DTO.CreateTransactionDTO;
+import com.example.DatabaseService.DTO.GetTransactionDTO;
 import com.example.DatabaseService.DTO.UpdateTransactionDTO;
 import com.example.DatabaseService.entity.Transactions;
 import com.example.DatabaseService.service.TransactionService;
@@ -23,11 +24,10 @@ public class TransactionsController {
 
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<List<Transactions>> getAllUserTransactions(@PathVariable Long id) {
-        List<Transactions> transactions = transactionService.getAllUserTransactions(id);
+    public ResponseEntity<List<GetTransactionDTO>> getAllUserTransactions(@PathVariable Long id) {
+        List<GetTransactionDTO> transactions = transactionService.getAllTransactions(id);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
-
 
     @PostMapping
     public ResponseEntity<Transactions> createTransaction(@RequestBody CreateTransactionDTO transactionDTO) {

@@ -152,18 +152,18 @@
                         <tr>
                             <th>Date</th>
                             <th>Amount</th>
-                            <th>Category</th>
+<!--                            <th>Category</th>-->
                             <th>From</th>
                             <th>To</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:if="${transactions != null}" th:each="transaction : ${transactions}">
-                            <td th:text="${#dates.format(transaction.expenses.date, 'yyyy-MM-dd')}">Jan 01, 2024</td>
-                            <td th:text="${transaction.expenses.amount}">$0.00</td>
-                            <td th:text="${transaction.expenses.category.name}">Category</td>
-                            <td th:text="'User ' + ${transaction.sender_id}">User 1</td>
-                            <td th:text="'User ' + ${transaction.receiver_id}">User 2</td>
+                            <td th:text="${#dates.format(transaction.getExpense().getDate(), 'yyyy-MM-dd')}"></td>
+                            <td th:text="${transaction.getExpense().getAmount()}"></td>
+<!--                            <td th:text="${transaction.getExpense().getCategoryName()}">Category</td>-->
+                            <td th:text="'User ' + ${transaction.getSenderId()}"></td>
+                            <td th:text="'User ' + ${transaction.getReceiverEmail()}"></td>
                         </tr>
                         <tr th:if="${transactions == null || #lists.isEmpty(transactions)}">
                             <td colspan="5" class="text-center">No transactions available</td>

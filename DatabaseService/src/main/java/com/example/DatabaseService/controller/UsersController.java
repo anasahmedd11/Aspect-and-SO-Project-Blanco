@@ -33,6 +33,14 @@ public class UsersController {
         }
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/user/{id}")
+    public ResponseEntity<String> getUserEmailById(@PathVariable Long id) {
+        Optional<Users> user = usersService.getUserById(id);
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get().getEmail());
+        }
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<Users> getUserByEmail(@PathVariable String email) {

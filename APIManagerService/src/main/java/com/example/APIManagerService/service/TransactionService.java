@@ -1,6 +1,6 @@
 package com.example.APIManagerService.service;
 
-import com.example.APIManagerService.DTO.Authentication.TransactionDTO;
+import com.example.APIManagerService.DTO.TransactionDTO;
 import com.example.APIManagerService.entity.Expenses;
 import com.example.APIManagerService.entity.Transactions;
 
@@ -30,6 +30,7 @@ public class TransactionService {
 
     public List<Transactions> getAllTransactions(Long userId) {
         String url = moneyManagementServiceUrl + "/user/" + userId;
+
         ResponseEntity<List<Transactions>> response = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -49,6 +50,9 @@ public class TransactionService {
         Long userId = userService.getUserByEmail(transaction.getReceiverEmail());
         if (userId == null) {
             new RuntimeException("No User found with provided mail");
+        }
+        if (transaction.getSenderId().equals(userId)) {
+            throw new RuntimeException("Sender and receiver cannot be the same user.");
         }
         Expenses expenses = new Expenses(userId, transaction.getAmount(), Long.valueOf(1), transaction.getNotes(), new Date());
         Expenses newExpense = expenseService.createExpense(expenses);

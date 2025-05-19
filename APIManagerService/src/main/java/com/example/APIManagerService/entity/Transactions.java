@@ -13,6 +13,7 @@ public class Transactions {
     private Long id;
     private Long senderId;
     private Long receiverId;
+    private String receiverEmail; // Optional
     private Long expenseId;
     private Expenses expense;
 

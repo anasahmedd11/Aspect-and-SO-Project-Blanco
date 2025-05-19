@@ -24,4 +24,10 @@ public class UserService {
             return useridResponse.getBody();
     }
 
+    public String getUserEmailUserId(Long id) {
+        String url = baseUrl + "/user/" + id;
+        ResponseEntity<String> userResponse = restTemplate.getForEntity(url, String.class);
+        return userResponse.getBody();
+    }
+
 }

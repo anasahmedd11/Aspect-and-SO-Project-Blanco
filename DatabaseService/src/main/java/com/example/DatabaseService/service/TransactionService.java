@@ -1,6 +1,7 @@
 package com.example.DatabaseService.service;
 
 import com.example.DatabaseService.DTO.CreateTransactionDTO;
+import com.example.DatabaseService.DTO.GetTransactionDTO;
 import com.example.DatabaseService.DTO.UpdateTransactionDTO;
 import com.example.DatabaseService.entity.Expenses;
 import com.example.DatabaseService.entity.Transactions;
@@ -25,9 +26,19 @@ public class TransactionService {
     private TransactionRepository transactionRepository;
 
 
-    public List<Transactions> getAllUserTransactions(Long userId) {
-        List<Transactions> transaction = transactionRepository.findBySenderId(userId);
-        return transaction;
+    public List<GetTransactionDTO> getAllTransactions(Long id) {
+        List<Transactions> transaction = transactionRepository.findBySenderId(id);
+        if (transaction == null) return List.of();
+        List<GetTransactionDTO> getTransactionDTO = new java.util.ArrayList<>();
+        for (Transactions transactions : transaction) {
+            GetTransactionDTO dto = new GetTransactionDTO();
+            dto.setId(transactions.getId());
+            dto.setExpenseId(transactions.getExpenses().getId());
+            dto.setReceiverId(transactions.getReceiver().getId());
+            dto.setSenderId(transactions.getSender().getId());
+            getTransactionDTO.add(dto);
+        }
+        return getTransactionDTO;
 
     }
 
@@ -38,7 +49,7 @@ public class TransactionService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + senderId));
 
         Long receiverId = transactionDTO.getReceiverId();
-        Users receiver = usersRepository.findById(senderId)
+        Users receiver = usersRepository.findById(receiverId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + receiverId));
 
         Long expenseId = transactionDTO.getExpenseId();
