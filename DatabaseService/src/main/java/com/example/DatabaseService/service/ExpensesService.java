@@ -4,9 +4,11 @@ import com.example.DatabaseService.DTO.CategoryExpenseDTO;
 import com.example.DatabaseService.DTO.CreateExpenseResponse;
 import com.example.DatabaseService.DTO.CreateExpenseDTO;
 import com.example.DatabaseService.DTO.UpdateExpenseDTO;
+import com.example.DatabaseService.entity.Budgets;
 import com.example.DatabaseService.entity.Categories;
 import com.example.DatabaseService.entity.Expenses;
 import com.example.DatabaseService.entity.Users;
+import com.example.DatabaseService.repository.BudgetsRepository;
 import com.example.DatabaseService.repository.CategoriesRepository;
 import com.example.DatabaseService.repository.ExpensesRepository;
 import com.example.DatabaseService.repository.UsersRepository;
@@ -28,13 +30,15 @@ public class ExpensesService {
     private final ExpensesRepository expensesRepository;
     private final CategoriesRepository categoriesRepository;
     private final UsersRepository usersRepository;
+    private final BudgetsRepository budgetsRepository;
 
     @Autowired
     public ExpensesService(ExpensesRepository expensesRepository, CategoriesRepository categoriesRepository,
-                           UsersRepository usersRepository) {
+                           UsersRepository usersRepository, BudgetsRepository budgetsRepository) {
         this.expensesRepository = expensesRepository;
         this.categoriesRepository = categoriesRepository;
         this.usersRepository = usersRepository;
+        this.budgetsRepository = budgetsRepository;
     }
 
     public List<CreateExpenseResponse> getAllExpenses() {
@@ -71,6 +75,14 @@ public class ExpensesService {
                 createExpenseDTO.getNotes(),
                 new Date()
         );
+
+        List<Budgets> budgetsList = budgetsRepository.findByUserIdAndCategoryId(userId, categoryId);
+        for (Budgets budget : budgetsList) {
+            if (expense.getDate().before(budget.getExpiresAt()) && expense.getDate().after(budget.getCreatedAt())) {
+                budget.setCurrentAmount(budget.getCurrentAmount() + createExpenseDTO.getAmount());
+                budgetsRepository.save(budget);
+            }
+        }
         return expensesRepository.save(expense);
     }
 
@@ -79,6 +91,21 @@ public class ExpensesService {
         Expenses existingExpense = expensesRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
         BeanUtils.copyProperties(updateExpenseDTO, existingExpense, getNullPropertyNames(updateExpenseDTO));
+
+        List<Budgets> budgetsList = budgetsRepository.findByUserIdAndCategoryId(
+                existingExpense.getUser().getId(), existingExpense.getCategory().getId());
+
+        Date expenseDate = updateExpenseDTO.getDate();
+        if (expenseDate != null)
+            existingExpense.setDate(expenseDate);
+        expenseDate = existingExpense.getDate();
+
+        for (Budgets budget : budgetsList) {
+            if (expenseDate.before(budget.getExpiresAt()) && expenseDate.after(budget.getCreatedAt())) {
+                budget.setCurrentAmount(budget.getCurrentAmount() + updateExpenseDTO.getAmount() - existingExpense.getAmount());
+                budgetsRepository.save(budget);
+            }
+        }
         return expensesRepository.save(existingExpense);
     }
 

@@ -1,5 +1,6 @@
 package com.example.APIManagerService.service;
 
+import com.example.APIManagerService.DTO.UpdateBudgetDTO;
 import com.example.APIManagerService.entity.Budgets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -7,7 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.example.APIManagerService.DTO.Authentication.BudgetDTO;
+import com.example.APIManagerService.DTO.CreateBudgetDTO;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +35,7 @@ public class BudgetService {
         return restTemplate.getForObject(url, Budgets.class);
     }
 
-    public void createBudget(BudgetDTO budgetDTO) {
+    public void createBudget(CreateBudgetDTO budgetDTO) {
 
         ResponseEntity<Budgets> response = restTemplate.postForEntity(baseUrl, budgetDTO, Budgets.class);
         if (response.getStatusCode().is2xxSuccessful()) {
@@ -47,22 +48,20 @@ public class BudgetService {
     public void updateBudget(Long id, Budgets budget) {
         String url = baseUrl + "/" + id;
         // Convert Budgets entity to BudgetDTO
-        var budgetDTO = new BudgetDTO(
+        var budgetDTO = new UpdateBudgetDTO(
                 budget.getCurrentAmount(),
                 budget.getLimitAmount(),
                 budget.getCreatedAt(),
-                budget.getExpiresAt(),
-                budget.getUserId(),
-                budget.getCategoryId()
+                budget.getExpiresAt()
         );
 
 
-        HttpEntity<BudgetDTO> requestEntity = new HttpEntity<>(budgetDTO);
-        ResponseEntity<Budgets[]> response = restTemplate.exchange(
+        HttpEntity<UpdateBudgetDTO> requestEntity = new HttpEntity<>(budgetDTO);
+        ResponseEntity<Budgets> response = restTemplate.exchange(
                 url,
                 HttpMethod.PUT,
                 requestEntity,
-                Budgets[].class
+                Budgets.class
         );
     }
 

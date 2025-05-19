@@ -21,16 +21,13 @@ public class Budgets {
     private Date createdAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expiresAt;
-    private Long categoryId;
+    private Categories category;
 
-    public Budgets(double currentAmount, double limitAmount, Date createdAt, Date expiresAt, Long userId, Long categoryId) {
+    public Budgets(double currentAmount, double limitAmount, Date createdAt, Date expiresAt, Categories category) {
         this.currentAmount = currentAmount;
         this.limitAmount = limitAmount;
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
-        this.userId = userId;
-        this.categoryId = categoryId;
+        this.category = category;
     }
-
-
 }

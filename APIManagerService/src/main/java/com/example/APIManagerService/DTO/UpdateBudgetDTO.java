@@ -1,4 +1,4 @@
-package com.example.APIManagerService.DTO.Authentication;
+package com.example.APIManagerService.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,17 +12,10 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BudgetDTO {
-
+public class UpdateBudgetDTO {
     private double currentAmount;
     private double limitAmount;
     private Date createdAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expiresAt;
-    private Long userId;
-    private Long categoryId;
-
-
-
-
 }

@@ -129,7 +129,7 @@
                             <td th:text="${budget.category}"></td>
                             <td th:text="${budget.limitAmount}"></td>
                             <td th:text="${budget.currentAmount}"></td>
-                            <td th:text="${budget.remainingAmount}"></td>
+                            <td th:text="${budget.limitAmount - budget.currentAmount}"></td>
                         </tr>
                         <tr th:if="${budgets == null || #lists.isEmpty(budgets)}">
                             <td colspan="5" class="text-center">No budgets available</td>
