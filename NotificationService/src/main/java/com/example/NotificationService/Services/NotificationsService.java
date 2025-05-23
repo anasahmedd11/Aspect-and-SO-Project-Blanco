@@ -88,33 +88,33 @@ public class NotificationsService {
         return createNotification(userId, msg, "CATEGORY_UPDATED", "UNREAD", sentAt);
     }
 
-//    public List<Notification> getUnreadNotifications(Long userId) {
-//        Notification[] notifications = restTemplate.getForObject(
-//                databaseServiceUrl + "/user/" + userId + "/status/UNREAD",
-//                Notification[].class
-//        );
-//        return Arrays.asList(notifications);
-//    }
-//
-//    public void markAsRead(Long notificationId) {
-//        restTemplate.put(
-//                databaseServiceUrl + "/" + notificationId + "/status/READ",
-//                null
-//        );
-//    }
-//
-//    public void markAllAsRead(Long userId) {
-//        restTemplate.put(
-//                databaseServiceUrl + "/user/" + userId + "/status/READ",
-//                null
-//        );
-//    }
-//    public long getUnreadCount(Long userId) {
-//        return restTemplate.getForObject(
-//                databaseServiceUrl + "/user/" + userId + "/status/UNREAD/count",
-//                Long.class
-//        );
-//    }
+    public List<Notifications> getUnreadNotifications(Long userId) {
+        Notifications[] notifications = restTemplate.getForObject(
+                databaseServiceUrl + "/user/" + userId + "/status/UNREAD",
+                Notifications[].class
+        );
+        return Arrays.asList(notifications);
+    }
+
+    public void markAsRead(Long notificationId) {
+        restTemplate.put(
+                databaseServiceUrl + "/" + notificationId + "/status/READ",
+                null
+        );
+    }
+
+    public void markAllAsRead(Long userId) {
+        restTemplate.put(
+                databaseServiceUrl + "/user/" + userId + "/status/READ",
+                null
+        );
+    }
+    public long getUnreadCount(Long userId) {
+        return restTemplate.getForObject(
+                databaseServiceUrl + "/user/" + userId + "/status/UNREAD/count",
+                Long.class
+        );
+    }
 
 
 }

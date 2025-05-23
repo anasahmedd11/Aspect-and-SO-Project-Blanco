@@ -29,7 +29,7 @@ public class LoginController {
         Cookie idCookie = new Cookie("active-user-id", null);
         idCookie.setPath("/");
         idCookie.setMaxAge(0);
-        response.addCookie(tokenCookie);
+        response.addCookie(idCookie);
 
         model.addAttribute("user", new LoginRequestDTO());
         return "login";

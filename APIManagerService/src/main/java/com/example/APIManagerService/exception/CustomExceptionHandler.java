@@ -21,9 +21,9 @@ public class CustomExceptionHandler {
         return "redirect:/home";
     }
 
-//    @ExceptionHandler({Exception.class})
-//    public String genericError(RedirectAttributes redirectAttributes) {
-//        redirectAttributes.addFlashAttribute("message", "Something went wrong. Please try again.");
-//        return "redirect:/home";
-//    }
+    @ExceptionHandler({Exception.class})
+    public String genericError(RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Something went wrong. Please try again.");
+        return "redirect:/home";
+    }
 }

@@ -11,6 +11,20 @@
             background-color: #f8f9fa;
         }
 
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+
+        .nav-link {
+            color: #495057;
+        }
+
         .dashboard-container {
             padding: 20px;
         }
@@ -163,7 +177,7 @@
                             <td th:text="${transaction.getExpense().getAmount()}"></td>
 <!--                            <td th:text="${transaction.getExpense().getCategoryName()}">Category</td>-->
                             <td th:text="'User ' + ${transaction.getSenderId()}"></td>
-                            <td th:text="'User ' + ${transaction.getReceiverEmail()}"></td>
+                            <td th:text="${transaction.getReceiverEmail()}"></td>
                         </tr>
                         <tr th:if="${transactions == null || #lists.isEmpty(transactions)}">
                             <td colspan="5" class="text-center">No transactions available</td>
