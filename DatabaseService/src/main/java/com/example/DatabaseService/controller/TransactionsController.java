@@ -25,9 +25,10 @@ public class TransactionsController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity<List<GetTransactionDTO>> getAllUserTransactions(@PathVariable Long id) {
-        List<GetTransactionDTO> transactions = transactionService.getAllTransactions(id);
+        List<GetTransactionDTO> transactions = transactionService.getAllUserTransactions(id);
         return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
+
 
     @PostMapping
     public ResponseEntity<Transactions> createTransaction(@RequestBody CreateTransactionDTO transactionDTO) {
